@@ -28,7 +28,7 @@ const TEAM = [
     name: 'Brad Stein',
     role: 'Commercial Lead',
     portfolio: 'Commercial Strategy & Governance',
-    bio: 'Covers commercial strategy and governance — deployment models, licensing, and the contractual shape of how systems are sold directly, deployed privately, or white-labelled.',
+    bio: 'Drives commercial strategy and governance, establishing deployment, licensing, and route-to-market models across direct, private, and white-label channels.',
   },
   {
     name: 'Ishay Katz',
