@@ -47,6 +47,16 @@ export const PRODUCTS = [
     ],
     dataBoundaryNote:
       'Schaaq runs inside the client\u2019s data perimeter. Operational and financial records never leave for a third-party LLM. Proprietary scanners and rules do the work in-place.',
+    commercialSummary: {
+      builtFor:
+        'CFOs, CIOs, data governance teams, audit/risk teams, ERP-heavy businesses.',
+      worksWith:
+        'operational, financial, ERP, transactional, and reference data.',
+      improves:
+        'defect visibility, cost attribution, review speed, data-governance evidence, and prioritisation.',
+      customisable:
+        'connectors, defect rules, commercial-impact models, thresholds, reports, dashboards, permissions, terminology.',
+    },
     media: '/video/schaaq-loop.mp4',
     poster: '/images/schaaq-poster.jpg',
     fallbackImg: '/assets/schaaq.png',
@@ -100,6 +110,16 @@ export const PRODUCTS = [
     ],
     dataBoundaryNote:
       'LNYRD keeps candidate and submission data inside the client\u2019s boundary. Resumes, scores, and evidence are not sent to a third-party LLM. Extraction and classification run on engines you control.',
+    commercialSummary: {
+      builtFor:
+        'recruitment teams, HR teams, assessment panels, professional services firms, internal review teams.',
+      worksWith:
+        'candidates, submissions, reviewer notes, criteria, scores, approvals, supporting evidence.',
+      improves:
+        'review consistency, evidence capture, comparison quality, decision traceability, administrative load.',
+      customisable:
+        'review criteria, scoring models, workflow stages, role permissions, approval paths, fields, reporting, integrations.',
+    },
     media: '/video/lnyrd-loop.mp4',
     poster: '/images/lnyrd-poster.jpg',
     fallbackImg: '/assets/lnyrd-dashboard.png',
@@ -154,6 +174,16 @@ export const PRODUCTS = [
     ],
     dataBoundaryNote:
       'Warranty Triage keeps claim data, customer records, and evidence inside the client\u2019s boundary. Third-party LLM services sit outside the perimeter and stay there.',
+    commercialSummary: {
+      builtFor:
+        'manufacturers, retailers, distributors, service networks, insurers, product-quality teams, warranty teams.',
+      worksWith:
+        'claims, product categories, defect codes, evidence, photos, service notes, warranty terms, routing rules.',
+      improves:
+        'claim routing speed, evidence quality, escalation control, reporting, service consistency.',
+      customisable:
+        'product categories, warranty rules, defect codes, evidence requirements, escalation thresholds, routing, dashboards.',
+    },
     media: '/video/warranty-loop.mp4',
     poster: '/images/warranty-poster.jpg',
     fallbackImg: '/assets/triage-home.png',

@@ -1,4 +1,5 @@
 import { handleLinkClick, buildHref } from '../lib/router.js';
+import { trackEvent, EVENTS } from '../lib/events.js';
 
 export const Eyebrow = ({ children, className = '', muted = false }) => (
   <div className={`${muted ? 'eyebrow-muted' : 'eyebrow'} ${className}`}>{children}</div>
@@ -65,36 +66,56 @@ export const GhostLink = ({
   onDark = false,
   className = '',
   children,
+  onClick,
 }) => (
   <RouterLink
     to={to}
     hash={hash}
     query={query}
     navigate={navigate}
+    onClick={onClick}
     className={`btn-ghost ${onDark ? 'on-dark' : ''} ${className}`}
   >
     {children}
   </RouterLink>
 );
 
-export const SolidLink = ({ to, hash, query, navigate, className = '', children }) => (
+export const SolidLink = ({
+  to,
+  hash,
+  query,
+  navigate,
+  className = '',
+  children,
+  onClick,
+}) => (
   <RouterLink
     to={to}
     hash={hash}
     query={query}
     navigate={navigate}
+    onClick={onClick}
     className={`btn-solid ${className}`}
   >
     {children}
   </RouterLink>
 );
 
-export const PrimaryCTA = ({ navigate, productSlug, className = '' }) => (
+const ctaClickHandler = (productSlug, source) => () => {
+  trackEvent(EVENTS.CTA_CLICK, {
+    product: productSlug || undefined,
+    source: source || 'primary-cta',
+    href: '/contact',
+  });
+};
+
+export const PrimaryCTA = ({ navigate, productSlug, source, className = '' }) => (
   <SolidLink
     to="/contact"
     navigate={navigate}
     query={productSlug ? { product: productSlug } : undefined}
     className={className}
+    onClick={ctaClickHandler(productSlug, source)}
   >
     Start a conversation <span aria-hidden>→</span>
   </SolidLink>
@@ -103,6 +124,7 @@ export const PrimaryCTA = ({ navigate, productSlug, className = '' }) => (
 export const PrimaryCTAGhost = ({
   navigate,
   productSlug,
+  source,
   onDark = false,
   className = '',
 }) => (
@@ -112,6 +134,7 @@ export const PrimaryCTAGhost = ({
     query={productSlug ? { product: productSlug } : undefined}
     onDark={onDark}
     className={className}
+    onClick={ctaClickHandler(productSlug, source)}
   >
     Start a conversation <span aria-hidden>→</span>
   </GhostLink>

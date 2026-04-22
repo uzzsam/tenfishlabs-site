@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Eyebrow, PageIntro } from '../components/primitives.jsx';
 import { getProduct } from '../data/products.js';
+import { trackEvent, EVENTS } from '../lib/events.js';
 
 const Field = ({ label, hint, className = '', children }) => (
   <label className={`block ${className}`}>
@@ -10,6 +11,17 @@ const Field = ({ label, hint, className = '', children }) => (
   </label>
 );
 
+const HONEYPOT_STYLE = {
+  position: 'absolute',
+  left: '-9999px',
+  top: 'auto',
+  width: '1px',
+  height: '1px',
+  overflow: 'hidden',
+  opacity: 0,
+  pointerEvents: 'none',
+};
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactPage({ query }) {
@@ -17,8 +29,16 @@ export default function ContactPage({ query }) {
   const product = productSlug ? getProduct(productSlug) : null;
 
   const [form, setForm] = useState({ problem: '', data: '', email: '' });
+  // Honeypot — real users never touch this
+  const [companyWebsite, setCompanyWebsite] = useState('');
   const [state, setState] = useState({ sending: false, ok: null, error: '' });
   const [clientErr, setClientErr] = useState({});
+
+  useEffect(() => {
+    if (product) {
+      trackEvent(EVENTS.CONTACT_CONTEXT_LOADED, { product: product.slug });
+    }
+  }, [product]);
 
   const update = (k) => (e) => {
     setForm({ ...form, [k]: e.target.value });
@@ -48,6 +68,18 @@ export default function ContactPage({ query }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    trackEvent(EVENTS.CONTACT_SUBMIT_ATTEMPT, {
+      product: productSlug || undefined,
+    });
+
+    // Honeypot — if filled, show the success UI but never POST.
+    if (companyWebsite.trim() !== '') {
+      setState({ sending: false, ok: true, error: '' });
+      setForm({ problem: '', data: '', email: '' });
+      return;
+    }
+
     const errs = validate();
     if (Object.keys(errs).length) {
       setClientErr(errs);
@@ -61,11 +93,16 @@ export default function ContactPage({ query }) {
         body: JSON.stringify({
           ...form,
           product: productSlug || undefined,
+          company_website: companyWebsite || undefined,
         }),
       });
       if (res.ok) {
         setState({ sending: false, ok: true, error: '' });
         setForm({ problem: '', data: '', email: '' });
+        trackEvent(EVENTS.CONTACT_SUBMIT_SUCCESS, {
+          product: productSlug || undefined,
+          status: res.status,
+        });
         return;
       }
       let msg = 'Something went wrong.';
@@ -76,11 +113,19 @@ export default function ContactPage({ query }) {
         // ignore
       }
       setState({ sending: false, ok: false, error: msg });
+      trackEvent(EVENTS.CONTACT_SUBMIT_ERROR, {
+        product: productSlug || undefined,
+        status: res.status,
+      });
     } catch (err) {
       setState({
         sending: false,
         ok: false,
         error: 'Network error — try the mail client fallback below.',
+      });
+      trackEvent(EVENTS.CONTACT_SUBMIT_ERROR, {
+        product: productSlug || undefined,
+        errorCode: 'network',
       });
     }
   };
@@ -137,6 +182,21 @@ export default function ContactPage({ query }) {
                 {/* Hidden product context — shipped in POST body */}
                 <input type="hidden" name="product" value={productSlug} readOnly />
 
+                {/* Honeypot — off-screen; real users never see or tab into this */}
+                <div aria-hidden="true" style={HONEYPOT_STYLE}>
+                  <label>
+                    Company website
+                    <input
+                      type="text"
+                      name="company_website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={companyWebsite}
+                      onChange={(e) => setCompanyWebsite(e.target.value)}
+                    />
+                  </label>
+                </div>
+
                 <Field label="01 · What are you trying to measure or improve?" className="mb-8">
                   <textarea
                     rows={4}
@@ -154,7 +214,7 @@ export default function ContactPage({ query }) {
 
                 <Field
                   label="02 · What data are you working with?"
-                  hint="Describe the data types only. Do not include confidential records, customer data, passwords, or live operational data."
+                  hint="Describe data types only. Do not paste confidential records, customer data, passwords, commercial secrets, or live operational data into this form."
                   className="mb-8"
                 >
                   <textarea
@@ -171,7 +231,7 @@ export default function ContactPage({ query }) {
                   )}
                 </Field>
 
-                <Field label="03 · Email" className="mb-10">
+                <Field label="03 · Email" className="mb-8">
                   <input
                     type="email"
                     inputMode="email"
@@ -187,6 +247,11 @@ export default function ContactPage({ query }) {
                     </div>
                   )}
                 </Field>
+
+                <p className="body-muted text-[12px] mb-8">
+                  We use this information only to assess whether the problem is a fit
+                  for Ten Fish Labs.
+                </p>
 
                 <div className="flex items-center justify-between gap-4 flex-wrap border-t border-rule pt-6">
                   <div className="spec text-muted">

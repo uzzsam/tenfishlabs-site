@@ -2,6 +2,12 @@
 
 Every image and video reference tracked. Duplicates, archive, and TODO-media all recorded here before a file lands in `public/`.
 
+**Current standing (reverified):**
+
+- ✅ No product screenshot is used as generic decorative filler. Each of the eight product screenshots appears only inside its own product's context (home portfolio card → `/products` overview card → `/products/:slug` hero fallback, plus one detail shot on the product page).
+- ✅ `/team` does not depend on individual portraits. The page uses three documentary/group images (`tenfish-team-working.jpg`, `tenfish-whiteboard.jpg`, `tenfish-session-detail.jpg`) and typographic role cards with expandable `<details>` bios. The five previous portrait paths (`/images/team/{uzy,julia,brad,ishay,sam}.jpg`) are no longer referenced anywhere in code.
+- ✅ No stock imagery. No fake AI graphics (no neural-net swirls, no data-stream gradients).
+
 Legend:
 
 - **Status** — `in-use` · `archive` (shipped but unreferenced; kept as proof asset) · `todo-media` (placeholder path, file not yet delivered).

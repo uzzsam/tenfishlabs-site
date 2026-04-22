@@ -44,6 +44,12 @@ export default async function handler(req, res) {
     return json(res, 400, { error: 'Missing body' });
   }
 
+  // Honeypot — filled only by bots. Return success silently without sending.
+  const honeypot = sanitise(body.company_website, 200);
+  if (honeypot) {
+    return json(res, 200, { ok: true });
+  }
+
   const problem = sanitise(body.problem);
   const data = sanitise(body.data);
   const email = sanitise(body.email, 200);

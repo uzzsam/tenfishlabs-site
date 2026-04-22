@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Container,
   Eyebrow,
@@ -8,8 +9,36 @@ import {
 import HeroMedia from '../components/HeroMedia.jsx';
 import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
 import { PRODUCTS } from '../data/products.js';
+import { trackEvent, EVENTS } from '../lib/events.js';
 
 const ROMAN = { schaaq: 'I', lnyrd: 'II', 'warranty-triage': 'III' };
+
+const CommercialSummary = ({ summary }) => {
+  if (!summary) return null;
+  const items = [
+    ['Built for', summary.builtFor],
+    ['Works with', summary.worksWith],
+    ['Improves', summary.improves],
+    ['Customisable', summary.customisable],
+  ].filter(([, v]) => v);
+  return (
+    <section className="border-b border-rule bg-page">
+      <Container className="py-10 md:py-12">
+        <div className="grid grid-cols-12 gap-x-10 gap-y-8">
+          {items.map(([label, value]) => (
+            <div
+              key={label}
+              className="col-span-12 md:col-span-6 lg:col-span-3 border-t border-ink pt-4"
+            >
+              <div className="eyebrow mb-3">{label.toUpperCase()}</div>
+              <p className="text-[14px] md:text-[15px] leading-[1.55]">{value}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 const SiblingNav = ({ currentSlug, navigate }) => (
   <nav className="flex items-center gap-6 flex-wrap spec text-muted">
@@ -52,6 +81,10 @@ const List = ({ items }) => (
 export default function ProductLandingPage({ product, navigate }) {
   const numeral = ROMAN[product.slug] || '';
 
+  useEffect(() => {
+    trackEvent(EVENTS.PRODUCT_PAGE_VIEW, { product: product.slug });
+  }, [product.slug]);
+
   return (
     <main className="page-in">
       {/* 1. Hero */}
@@ -85,6 +118,9 @@ export default function ProductLandingPage({ product, navigate }) {
           </div>
         </div>
       </section>
+
+      {/* 1b. Commercial summary — compact */}
+      <CommercialSummary summary={product.commercialSummary} />
 
       {/* 2. What it does */}
       <section className="py-20 md:py-28 border-b border-rule">

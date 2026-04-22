@@ -120,6 +120,48 @@ export default function MethodPage({ navigate }) {
         </Container>
       </section>
 
+      {/* Commercial model */}
+      <section className="py-20 md:py-28 border-t border-rule bg-panel">
+        <Container>
+          <div className="grid grid-cols-12 gap-10 items-start">
+            <div className="col-span-12 md:col-span-5">
+              <Eyebrow className="mb-6">COMMERCIAL MODEL</Eyebrow>
+              <h2 className="display text-[28px] md:text-[40px] leading-[1.05]">
+                Built for your problem. Designed to become reusable.
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-7 space-y-6">
+              <p className="body-lead">
+                Some systems begin with a specific client problem. We configure the
+                system around the client’s workflow, data, terminology, rules, and
+                reporting needs.
+              </p>
+              <p className="body-lead">
+                The client keeps its data, confidential workflows, and business
+                context. Ten Fish Labs retains the reusable platform, components,
+                methods, and non-client-specific product IP, so each build
+                strengthens the next one.
+              </p>
+              <div className="pt-4 grid grid-cols-2 gap-6 border-t border-ruleStrong">
+                <div className="pt-4">
+                  <div className="eyebrow-muted mb-2">CLIENT KEEPS</div>
+                  <p className="body-muted">
+                    Their data, confidential workflows, and business context.
+                  </p>
+                </div>
+                <div className="pt-4">
+                  <div className="eyebrow-muted mb-2">TEN FISH LABS KEEPS</div>
+                  <p className="body-muted">
+                    The reusable platform, components, methods, and non-client
+                    product IP.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Steps */}
       <section className="py-20 md:py-28 border-t border-rule">
         <Container>

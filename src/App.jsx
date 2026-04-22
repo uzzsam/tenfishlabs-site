@@ -9,30 +9,13 @@ import TeamPage from './pages/TeamPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
 import { useRouter } from './lib/router.js';
 import { getProduct } from './data/products.js';
-
-const TITLES = {
-  '/': 'Ten Fish Labs — Software for operational review work',
-  '/products': 'Products — Ten Fish Labs',
-  '/method': 'Method — Ten Fish Labs',
-  '/team': 'Team — Ten Fish Labs',
-  '/contact': 'Contact — Ten Fish Labs',
-};
-
-function titleFor(path) {
-  if (TITLES[path]) return TITLES[path];
-  if (path.startsWith('/products/')) {
-    const slug = path.slice('/products/'.length).replace(/\/+$/, '');
-    const p = getProduct(slug);
-    if (p) return `${p.title} — Ten Fish Labs`;
-  }
-  return 'Ten Fish Labs';
-}
+import { applyMeta } from './lib/meta.js';
 
 export default function App() {
   const { path, hash, query, navigate } = useRouter();
 
   useEffect(() => {
-    document.title = titleFor(path);
+    applyMeta(path);
   }, [path]);
 
   let page = null;
