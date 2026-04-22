@@ -14,19 +14,19 @@ const TEAM_SESSION = '/images/team/tenfish-session-detail.jpg';
 const TEAM = [
   {
     name: 'Uzy Samorali',
-    role: 'Managing Director',
+    role: 'Principal Engineer',
     portfolio: 'Product, Architecture & Commercial Systems',
     bio: 'Builds Ten Fish Labs’ commercial systems end-to-end — from the data architecture underneath to the review workflow on top. Works directly with client teams to ship production software.',
   },
   {
     name: 'Julia Samorali',
-    role: 'Director',
+    role: 'Operations Lead',
     portfolio: 'Operations & Product Experience',
     bio: 'Leads operations and product experience. Responsible for how teams actually use Ten Fish Labs systems day-to-day — intake, onboarding, documentation, and the review surface users see.',
   },
   {
     name: 'Brad Stein',
-    role: 'Director',
+    role: 'Commercial Lead',
     portfolio: 'Commercial Strategy & Governance',
     bio: 'Covers commercial strategy and governance — deployment models, licensing, and the contractual shape of how systems are sold directly, deployed privately, or white-labelled.',
   },

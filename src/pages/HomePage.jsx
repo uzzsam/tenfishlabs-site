@@ -15,15 +15,15 @@ const ROMAN = ['I', 'II', 'III'];
 const TEAM_PREVIEW = [
   {
     name: 'Uzy Samorali',
-    role: 'Managing Director',
+    role: 'Principal Engineer',
     portfolio: 'Product, Architecture & Commercial Systems',
   },
   {
     name: 'Julia Samorali',
-    role: 'Director',
+    role: 'Operations Lead',
     portfolio: 'Operations & Product Experience',
   },
-  { name: 'Brad Stein', role: 'Director', portfolio: 'Commercial Strategy & Governance' },
+  { name: 'Brad Stein', role: 'Commercial Lead', portfolio: 'Commercial Strategy & Governance' },
   {
     name: 'Ishay Katz',
     role: 'Advisory Board',
