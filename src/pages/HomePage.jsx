@@ -27,7 +27,7 @@ const TEAM_PREVIEW = [
   {
     name: 'Ishay Katz',
     role: 'Advisory Board',
-    portfolio: 'Partnerships & Client Relationships',
+    portfolio: 'Partnerships, Innovation & Community Building',
   },
   {
     name: 'Sam Nelson',

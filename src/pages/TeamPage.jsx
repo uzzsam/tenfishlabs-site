@@ -33,8 +33,8 @@ const TEAM = [
   {
     name: 'Ishay Katz',
     role: 'Advisory Board',
-    portfolio: 'Partnerships & Client Relationships',
-    bio: 'Advises on partnerships and client relationships — where a Ten Fish Labs system slots into a broader ecosystem of partners, distribution, and longer-term client engagements.',
+    portfolio: 'Partnerships, Innovation & Community Building',
+    bio: 'Advises on partnerships, innovation, and community building — connecting Ten Fish Labs into a broader ecosystem of partners, client relationships, and the innovation community.',
   },
   {
     name: 'Sam Nelson',
