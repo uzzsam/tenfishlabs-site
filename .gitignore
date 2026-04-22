@@ -13,3 +13,6 @@ Ten Fish Lab.zip
 .claude/
 
 .vercel
+
+# stray local docs
+*.docx

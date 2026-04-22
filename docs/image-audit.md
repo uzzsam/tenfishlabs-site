@@ -1,59 +1,86 @@
 # Image audit — Ten Fish Labs site
 
-Generated against the rebuilt site. Every image reference tracked, duplication noted, final use assigned.
+Every image and video reference tracked. Duplicates, archive, and TODO-media all recorded here before a file lands in `public/`.
 
 Legend:
 
-- **Status** — `in-use`, `archive` (shipped but not referenced; kept as proof asset), `todo-media` (placeholder path, file not yet delivered).
-- **Duplicated?** — flagged if the same asset is referenced in two unrelated contexts.
+- **Status** — `in-use` · `archive` (shipped but unreferenced; kept as proof asset) · `todo-media` (placeholder path, file not yet delivered).
+- **Duplicated?** — flagged only when the same asset appears in *unrelated* contexts.
 
 ## Product screenshots (`public/assets/`)
 
-| File                        | Status  | Used in                                                            | Duplicated?                           | Recommended final use                                    |
-| --------------------------- | ------- | ------------------------------------------------------------------ | ------------------------------------- | -------------------------------------------------------- |
-| `/assets/schaaq.png`        | in-use  | `HomePage` portfolio card · `ProductsPage` Schaaq hero             | Yes (home card + product hero — OK, same product) | Keep. Schaaq primary shot.                               |
-| `/assets/schaaq-ma.png`     | in-use  | `ProductsPage` Schaaq detail                                       | No                                    | Keep as Schaaq M&A diagnostic detail shot.               |
-| `/assets/schaaq-report.png` | archive | —                                                                  | Was duplicative with `schaaq-ma.png`  | Hold as backup. Re-introduce only if Schaaq grows a third distinct shot. |
-| `/assets/lnyrd-dashboard.png` | in-use | `HomePage` portfolio card · `ProductsPage` LNYRD hero              | Yes (home card + product hero — OK)   | Keep. LNYRD primary shot.                                |
-| `/assets/lnyrd-candidates.png` | in-use | `ProductsPage` LNYRD detail                                       | No                                    | Keep as LNYRD candidate-review detail shot.              |
-| `/assets/lnyrd-reviews.png` | archive | —                                                                  | No                                    | Hold as backup. Was duplicative with `lnyrd-candidates.png`. |
-| `/assets/triage-home.png`   | in-use  | `HomePage` portfolio card · `ProductsPage` Warranty hero           | Yes (home card + product hero — OK)   | Keep. Warranty Triage primary shot.                      |
-| `/assets/triage-rive.png`   | in-use  | `ProductsPage` Warranty detail                                     | No                                    | Keep as Warranty Triage start-review detail shot.        |
+| File                           | Status  | Used in                                                                                          | Duplicated?                       | Recommended final use                                                                          |
+| ------------------------------ | ------- | ------------------------------------------------------------------------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `/assets/schaaq.png`           | in-use  | HomePage portfolio card · `/products` overview card · `/products/schaaq` hero fallback           | No (all within Schaaq context)    | Schaaq primary shot.                                                                           |
+| `/assets/schaaq-ma.png`        | in-use  | `/products/schaaq` detail ref (via `detailImg`)                                                   | No                                | Schaaq M&A diagnostic detail.                                                                  |
+| `/assets/schaaq-report.png`    | archive | —                                                                                                | Was duplicative with `schaaq-ma.png` | Hold. Surface only if Schaaq earns a third distinct shot.                                  |
+| `/assets/lnyrd-dashboard.png`  | in-use  | HomePage portfolio card · `/products` overview card · `/products/lnyrd` hero fallback            | No (all within LNYRD context)     | LNYRD primary shot.                                                                            |
+| `/assets/lnyrd-candidates.png` | in-use  | `/products/lnyrd` detail ref                                                                     | No                                | LNYRD candidate-review detail.                                                                 |
+| `/assets/lnyrd-reviews.png`    | archive | —                                                                                                | No                                | Hold. Duplicated with `lnyrd-candidates.png`.                                                  |
+| `/assets/triage-home.png`      | in-use  | HomePage portfolio card · `/products` overview card · `/products/warranty-triage` hero fallback  | No (all within Warranty context)  | Warranty Triage primary shot.                                                                  |
+| `/assets/triage-rive.png`      | in-use  | `/products/warranty-triage` detail ref                                                           | No                                | Warranty Triage start-review detail.                                                           |
 
-### Notes
+### Rules
 
-- The previous site re-used `schaaq.png`, `triage-home.png`, `lnyrd-dashboard.png` across *unrelated* contexts (approach mosaics, priority callouts, full-bleed bands). That's gone. In the rebuild each screenshot is used at most once per page, and only inside its own product context.
-- `schaaq-report.png` and `schaaq-ma.png` overlapped in content — the M&A diagnostic view is richer, so that stays in-use; the report view goes to archive.
-- `lnyrd-reviews.png` and `lnyrd-candidates.png` overlapped — candidate view is sharper proof, so that stays in-use; reviews goes to archive.
-- Product screenshots are never used as decorative background imagery. They only appear framed in a product context.
+- No product screenshot is used as decorative filler. They appear only inside their own product context.
+- No screenshot appears in two unrelated places (home hero, team, method, etc.).
+- Each product's own page uses at most one primary shot + one detail shot.
 
 ## New media (`public/video/`, `public/images/`)
 
-| File                          | Status     | Used in                                  | TODO                                                                                   |
-| ----------------------------- | ---------- | ---------------------------------------- | -------------------------------------------------------------------------------------- |
-| `/video/hero-scanner.mp4`     | todo-media | `HeroMedia` on `/`                       | Deliver a short (5–8s), silent, looping MP4 of an operational-review scanner/workflow. |
-| `/images/hero-scanner.jpg`    | todo-media | `HeroMedia` poster + fallback            | Deliver a 1920×1280 still matching the video's first frame.                            |
-| `/images/perth-coast.jpg`     | todo-media | (reserved — not yet wired)               | Candidate for a `/team` or `/contact` locale backdrop. Not referenced in code yet.     |
-| `/images/team/uzy.jpg`        | todo-media | `HomePage` team preview · `TeamPage`     | Portrait, 4:5, high-res. CSS applies `grayscale(1)`.                                   |
-| `/images/team/julia.jpg`      | todo-media | `HomePage` team preview · `TeamPage`     | Same brief.                                                                            |
-| `/images/team/brad.jpg`       | todo-media | `HomePage` team preview · `TeamPage`     | Same brief.                                                                            |
-| `/images/team/ishay.jpg`      | todo-media | `HomePage` team preview · `TeamPage`     | Same brief.                                                                            |
-| `/images/team/sam.jpg`        | todo-media | `HomePage` team preview · `TeamPage`     | Same brief.                                                                            |
+### Home hero — systems loop
 
-While `todo-media` files are missing:
+| File                                    | Status     | Used in                | TODO brief                                                                                                 |
+| --------------------------------------- | ---------- | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `/video/tenfish-systems-loop.mp4`       | todo-media | HomePage `HeroMedia`   | 8–12s silent loop cutting product interface · data scanning · evidence/outputs · architecture diagram · team working. H.264, <3 MB. |
+| `/images/tenfish-systems-poster.jpg`    | todo-media | HomePage hero poster   | 1920×1280 still — representative frame from the loop.                                                      |
 
-- `<img onError>` hides the broken image so empty plinths render clean.
-- `HeroMedia` hides the `<video>` on error and reveals the `/assets/schaaq.png` fallback (marked as a temporary fallback in source).
+Fallback while missing: `/assets/schaaq.png` (screenshot only — no text overlay on the video).
 
-## Removed from use
+### Product hero loops
 
-- `schaaq-report.png`, `lnyrd-reviews.png` — kept on disk as proof archive, not referenced in components.
-- Full-bleed screenshot bands, `HeroTripleShot`, `CraftMosaic`, `PhoneShot` — removed with the old `visuals.jsx`. Product screenshots no longer act as decorative backdrops.
+| File                              | Status     | Used in                      | TODO brief                                                                |
+| --------------------------------- | ---------- | ---------------------------- | ------------------------------------------------------------------------- |
+| `/video/schaaq-loop.mp4`          | todo-media | `/products/schaaq` hero      | Short loop of Schaaq UI scanning a schema and producing a finding.        |
+| `/images/schaaq-poster.jpg`       | todo-media | `/products/schaaq` poster    | 1920×1280 still from Schaaq UI.                                           |
+| `/video/lnyrd-loop.mp4`           | todo-media | `/products/lnyrd` hero       | Short loop of LNYRD criteria review surface in use.                       |
+| `/images/lnyrd-poster.jpg`        | todo-media | `/products/lnyrd` poster     | 1920×1280 still from LNYRD surface.                                       |
+| `/video/warranty-loop.mp4`        | todo-media | `/products/warranty-triage`  | Short loop of Warranty Triage claim routing.                              |
+| `/images/warranty-poster.jpg`     | todo-media | `/products/warranty-triage`  | 1920×1280 still from Warranty Triage.                                     |
+
+Fallback while missing: each product's existing primary screenshot (via `HeroMedia` `onError`).
+
+### Team imagery — group/documentary, not portraits
+
+| File                                              | Status     | Used in                                  | TODO brief                                                                                 |
+| ------------------------------------------------- | ---------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `/images/team/tenfish-team-working.jpg`           | todo-media | `/team` hero · (HomePage: no image used) | Wide documentary frame of the team working together. Natural light. No corporate posing.   |
+| `/images/team/tenfish-whiteboard.jpg`             | todo-media | `/team` documentary strip (left)         | Whiteboard session — hands and board, not centred faces. Same visual language.             |
+| `/images/team/tenfish-session-detail.jpg`         | todo-media | `/team` documentary strip (right)        | Close detail — a notebook, a screen, a model on a laptop. Reinforces "we build, in situ".  |
+
+### Removed / no longer referenced
+
+Individual portrait paths from the previous iteration are **no longer used in code**:
+
+- `/images/team/uzy.jpg`
+- `/images/team/julia.jpg`
+- `/images/team/brad.jpg`
+- `/images/team/ishay.jpg`
+- `/images/team/sam.jpg`
+
+The `/team` page and the HomePage team preview now rely on typographic role cards + group documentary imagery. Bring portraits back only if they are used editorially *in addition to* the group imagery, never as the primary visual direction.
+
+- `/images/hero-scanner.jpg` / `/video/hero-scanner.mp4` — superseded by `tenfish-systems-*`. Remove from any stale references.
+- `/images/perth-coast.jpg` — reserved; not referenced anywhere in code. Hold.
+
+### Archive
+
+- `schaaq-report.png`, `lnyrd-reviews.png` — on disk, unreferenced.
 
 ## Hygiene rules going forward
 
-1. A product screenshot may appear in at most one card on a given page, and only inside that product's own context.
-2. No stock imagery.
-3. No decorative use of product screenshots behind text — if a background image is needed, use a `todo-media` placeholder and flag it here.
-4. Team portraits get `grayscale(1) contrast(1.02)` — no colour portraits mixed in.
-5. Every new `/images/*` or `/video/*` reference must be added to this table with a `todo-media` entry until the file lands in `public/`.
+1. No stock imagery.
+2. No fake AI graphics — no neural-network swirls, no data-stream gradients.
+3. No product screenshot may be reused as decorative filler. One product, one context.
+4. Team imagery is group/documentary — not corporate headshot-led.
+5. Every new `/images/*` or `/video/*` path must be added to this table with a `todo-media` entry *before* it lands in `public/`.

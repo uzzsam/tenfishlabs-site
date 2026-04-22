@@ -8,40 +8,32 @@ import {
 } from '../components/primitives.jsx';
 import HeroMedia from '../components/HeroMedia.jsx';
 import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
+import { PRODUCTS } from '../data/products.js';
 
-const PORTFOLIO = [
-  {
-    to: '/products',
-    hash: 'schaaq',
-    eyebrow: 'I · SCHAAQ',
-    name: 'Schaaq',
-    line: 'Data architecture review for teams that carry the operational load of a schema.',
-    img: '/assets/schaaq.png',
-  },
-  {
-    to: '/products',
-    hash: 'lnyrd',
-    eyebrow: 'II · LNYRD',
-    name: 'LNYRD',
-    line: 'Structured candidate review with a defensible record of every decision.',
-    img: '/assets/lnyrd-dashboard.png',
-  },
-  {
-    to: '/products',
-    hash: 'warranty',
-    eyebrow: 'III · WARRANTY TRIAGE',
-    name: 'Warranty Triage',
-    line: 'Claim intake, categorisation, and routing — structured, consistent, auditable.',
-    img: '/assets/triage-home.png',
-  },
-];
+const ROMAN = ['I', 'II', 'III'];
 
 const TEAM_PREVIEW = [
-  { name: 'Uzy Samorali', role: 'Managing Director', img: '/images/team/uzy.jpg' },
-  { name: 'Julia Samorali', role: 'Director', img: '/images/team/julia.jpg' },
-  { name: 'Brad Stein', role: 'Director', img: '/images/team/brad.jpg' },
-  { name: 'Ishay Katz', role: 'Advisory Board', img: '/images/team/ishay.jpg' },
-  { name: 'Sam Nelson', role: 'Advisory Board', img: '/images/team/sam.jpg' },
+  {
+    name: 'Uzy Samorali',
+    role: 'Managing Director',
+    portfolio: 'Product, Architecture & Commercial Systems',
+  },
+  {
+    name: 'Julia Samorali',
+    role: 'Director',
+    portfolio: 'Operations & Product Experience',
+  },
+  { name: 'Brad Stein', role: 'Director', portfolio: 'Commercial Strategy & Governance' },
+  {
+    name: 'Ishay Katz',
+    role: 'Advisory Board',
+    portfolio: 'Partnerships & Client Relationships',
+  },
+  {
+    name: 'Sam Nelson',
+    role: 'Advisory Board',
+    portfolio: 'Data, ESG & Regulatory Systems',
+  },
 ];
 
 export default function HomePage({ navigate }) {
@@ -85,12 +77,16 @@ export default function HomePage({ navigate }) {
             </Container>
           </div>
           <div className="col-span-12 md:col-span-5 bg-night">
-            <HeroMedia />
+            <HeroMedia
+              video="/video/tenfish-systems-loop.mp4"
+              poster="/images/tenfish-systems-poster.jpg"
+              fallbackImg="/assets/schaaq.png"
+            />
           </div>
         </div>
       </section>
 
-      {/* 2. Method summary with data-boundary diagram */}
+      {/* 2. Method summary */}
       <section className="py-24 md:py-32 border-b border-rule">
         <Container>
           <div className="grid grid-cols-12 gap-10 lg:gap-16 items-start">
@@ -101,8 +97,8 @@ export default function HomePage({ navigate }) {
               </h2>
               <p className="body-lead mt-6 max-w-md">
                 Sensitive operational data should not become prompt context for somebody
-                else's model. Our systems extract, classify, score, route, and report on
-                data that never leaves the client's boundary.
+                else’s model. Our systems extract, classify, score, route, and report on
+                data that never leaves the client’s boundary.
               </p>
               <p className="body-lead mt-5 max-w-md">
                 AI methodologies are used where they remove tedious review work — not to
@@ -132,35 +128,35 @@ export default function HomePage({ navigate }) {
         <Container>
           <SectionHeader
             eyebrow="PORTFOLIO"
-            title={<>Three systems live. More in build.</>}
-            intro="Each system is purpose-built around a commercial problem where existing tools leave too much tedious review work to humans."
+            title={<>A growing portfolio of commercial systems.</>}
+            intro="Three are live. More are in development. Each system starts with a specific commercial problem and is built so the useful parts can be adapted for similar problems later."
           />
 
           <div className="mt-16 grid grid-cols-12 gap-6 md:gap-8">
-            {PORTFOLIO.map((p) => (
+            {PRODUCTS.map((p, i) => (
               <RouterLink
-                key={p.hash}
-                to={p.to}
-                hash={p.hash}
+                key={p.slug}
+                to={`/products/${p.slug}`}
                 navigate={navigate}
                 className="col-span-12 md:col-span-6 lg:col-span-3 group block border border-rule hover:border-ink transition-colors"
               >
                 <div className="aspect-[4/3] bg-panel overflow-hidden border-b border-rule">
                   <img
-                    src={p.img}
-                    alt=""
+                    src={p.fallbackImg}
+                    alt={p.title}
                     className="w-full h-full"
                     style={{ objectFit: 'cover', objectPosition: 'top' }}
                   />
                 </div>
                 <div className="p-6">
-                  <div className="eyebrow-muted mb-3">{p.eyebrow}</div>
-                  <div className="display text-[22px] mb-2">{p.name}</div>
-                  <p className="body-muted">{p.line}</p>
+                  <div className="eyebrow-muted mb-3">
+                    {ROMAN[i]} · {p.title.toUpperCase()}
+                  </div>
+                  <div className="display text-[22px] mb-2">{p.title}</div>
+                  <p className="body-muted">{p.summary}</p>
                 </div>
               </RouterLink>
             ))}
-            {/* In development — no image, dashed card */}
             <RouterLink
               to="/products"
               hash="in-development"
@@ -177,8 +173,8 @@ export default function HomePage({ navigate }) {
                 <div className="eyebrow-muted mb-3">IV · IN DEVELOPMENT</div>
                 <div className="display text-[22px] mb-2">More commercial systems</div>
                 <p className="body-muted">
-                  Data quality, operational review, ESG/regulatory data, and commercial
-                  workflow automation.
+                  Data quality, operational review, ESG and regulatory data, and
+                  commercial workflow automation.
                 </p>
               </div>
             </RouterLink>
@@ -186,14 +182,15 @@ export default function HomePage({ navigate }) {
         </Container>
       </section>
 
-      {/* 4. Team preview */}
+      {/* 4. Team preview — no individual portraits */}
       <section className="py-24 md:py-32 border-b border-rule">
         <Container>
           <div className="grid grid-cols-12 gap-10 items-end">
             <div className="col-span-12 md:col-span-7">
               <Eyebrow className="mb-6">TEAM</Eyebrow>
               <h2 className="display text-[32px] md:text-[44px] leading-[1.05]">
-                Operators who have shipped commercial systems.
+                A small senior team building commercial systems from product, data,
+                design, governance, and domain expertise.
               </h2>
             </div>
             <div className="col-span-12 md:col-span-5 md:text-right">
@@ -207,31 +204,18 @@ export default function HomePage({ navigate }) {
             </div>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
-            {TEAM_PREVIEW.map((t) => (
-              <figure key={t.name} className="block">
-                <div className="aspect-[3/4] bg-panel overflow-hidden">
-                  <img
-                    src={t.img}
-                    alt={t.name}
-                    className="w-full h-full"
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      filter: 'grayscale(1) contrast(1.02)',
-                    }}
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
+          <div className="mt-14 grid grid-cols-12 gap-0 border-t border-ink">
+            {TEAM_PREVIEW.map((t, i) => (
+              <div
+                key={t.name}
+                className="col-span-12 md:col-span-6 lg:col-span-4 border-b border-rule py-6 pr-6"
+              >
+                <div className="spec text-muted mb-3">
+                  {String(i + 1).padStart(2, '0')} · {t.role.toUpperCase()}
                 </div>
-                <figcaption className="mt-4">
-                  <div className="text-[15px] font-medium tracking-[-0.01em]">
-                    {t.name}
-                  </div>
-                  <div className="body-muted mt-1 text-[13px]">{t.role}</div>
-                </figcaption>
-              </figure>
+                <div className="display text-[20px] md:text-[22px]">{t.name}</div>
+                <div className="body-muted mt-1">{t.portfolio}</div>
+              </div>
             ))}
           </div>
         </Container>
@@ -243,7 +227,7 @@ export default function HomePage({ navigate }) {
           <div className="max-w-3xl">
             <Eyebrow className="mb-8 text-white">NEXT</Eyebrow>
             <h2 className="display text-[36px] md:text-[56px] leading-[1.02]">
-              If your problem lives in data and current tools are too noisy, we'd like to
+              If your problem lives in data and current tools are too noisy, we’d like to
               hear about it.
             </h2>
             <div className="mt-12">

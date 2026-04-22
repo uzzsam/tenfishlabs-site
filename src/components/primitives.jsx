@@ -1,4 +1,4 @@
-import { handleLinkClick } from '../lib/router.js';
+import { handleLinkClick, buildHref } from '../lib/router.js';
 
 export const Eyebrow = ({ children, className = '', muted = false }) => (
   <div className={`${muted ? 'eyebrow-muted' : 'eyebrow'} ${className}`}>{children}</div>
@@ -25,17 +25,18 @@ export const TFLMark = ({ size = 18, fill = '#111' }) => (
 export const RouterLink = ({
   to,
   hash,
+  query,
   navigate,
   className = '',
   children,
   onClick,
   ...rest
 }) => {
-  const href = hash ? `${to}#${hash}` : to;
+  const href = buildHref(to, { hash, query });
   const clickHandler = (e) => {
     if (onClick) onClick(e);
     if (e.defaultPrevented) return;
-    handleLinkClick(navigate, to, hash)(e);
+    handleLinkClick(navigate, to, { hash, query })(e);
   };
   return (
     <a href={href} onClick={clickHandler} className={className} {...rest}>
@@ -56,10 +57,19 @@ export const NavLink = ({ to, active, navigate, children }) => (
   </RouterLink>
 );
 
-export const GhostLink = ({ to, hash, navigate, onDark = false, className = '', children }) => (
+export const GhostLink = ({
+  to,
+  hash,
+  query,
+  navigate,
+  onDark = false,
+  className = '',
+  children,
+}) => (
   <RouterLink
     to={to}
     hash={hash}
+    query={query}
     navigate={navigate}
     className={`btn-ghost ${onDark ? 'on-dark' : ''} ${className}`}
   >
@@ -67,10 +77,11 @@ export const GhostLink = ({ to, hash, navigate, onDark = false, className = '', 
   </RouterLink>
 );
 
-export const SolidLink = ({ to, hash, navigate, className = '', children }) => (
+export const SolidLink = ({ to, hash, query, navigate, className = '', children }) => (
   <RouterLink
     to={to}
     hash={hash}
+    query={query}
     navigate={navigate}
     className={`btn-solid ${className}`}
   >
@@ -78,16 +89,27 @@ export const SolidLink = ({ to, hash, navigate, className = '', children }) => (
   </RouterLink>
 );
 
-export const PrimaryCTA = ({ navigate, onDark = false, className = '' }) => (
-  <SolidLink to="/contact" navigate={navigate} className={`${className}`}>
+export const PrimaryCTA = ({ navigate, productSlug, className = '' }) => (
+  <SolidLink
+    to="/contact"
+    navigate={navigate}
+    query={productSlug ? { product: productSlug } : undefined}
+    className={className}
+  >
     Start a conversation <span aria-hidden>→</span>
   </SolidLink>
 );
 
-export const PrimaryCTAGhost = ({ navigate, onDark = false, className = '' }) => (
+export const PrimaryCTAGhost = ({
+  navigate,
+  productSlug,
+  onDark = false,
+  className = '',
+}) => (
   <GhostLink
     to="/contact"
     navigate={navigate}
+    query={productSlug ? { product: productSlug } : undefined}
     onDark={onDark}
     className={className}
   >

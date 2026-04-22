@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Container, Eyebrow, PageIntro } from '../components/primitives.jsx';
+import { getProduct } from '../data/products.js';
 
 const Field = ({ label, hint, className = '', children }) => (
   <label className={`block ${className}`}>
@@ -11,7 +12,10 @@ const Field = ({ label, hint, className = '', children }) => (
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function ContactPage() {
+export default function ContactPage({ query }) {
+  const productSlug = query?.product || '';
+  const product = productSlug ? getProduct(productSlug) : null;
+
   const [form, setForm] = useState({ problem: '', data: '', email: '' });
   const [state, setState] = useState({ sending: false, ok: null, error: '' });
   const [clientErr, setClientErr] = useState({});
@@ -30,8 +34,10 @@ export default function ContactPage() {
   };
 
   const mailtoFallback = () => {
-    const subject = 'Ten Fish Labs — new enquiry';
+    const subjectProduct = product ? ` (${product.title})` : '';
+    const subject = `Ten Fish Labs — new enquiry${subjectProduct}`;
     const body =
+      (product ? `Product context: ${product.title} (${product.slug})\n\n` : '') +
       `What are you trying to measure or improve?\n${form.problem}\n\n` +
       `What data are you working with?\n${form.data}\n\n` +
       `From: ${form.email}`;
@@ -52,7 +58,10 @@ export default function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          product: productSlug || undefined,
+        }),
       });
       if (res.ok) {
         setState({ sending: false, ok: true, error: '' });
@@ -85,6 +94,12 @@ export default function ContactPage() {
             title={<>Start a conversation.</>}
             intro="Tell us what you are trying to measure or improve, and the shape of the data you are working with. We will get back to you within two business days."
           />
+          {product && (
+            <div className="mt-8 inline-flex items-center gap-3 border border-ink px-4 py-2">
+              <span className="spec">CONTEXT</span>
+              <span className="text-[14px]">{product.title}</span>
+            </div>
+          )}
         </Container>
       </section>
 
@@ -102,11 +117,11 @@ export default function ContactPage() {
                   hello@tenfishlabs.com
                 </a>
               </div>
-              <div className="flex justify-between border-t border-b border-rule py-3">
+              <div className="flex justify-between border-t border-rule py-3">
                 <span className="spec text-muted">RESPONSE</span>
                 <span className="text-[14px]">Within 2 business days</span>
               </div>
-              <div className="flex justify-between border-b border-rule py-3">
+              <div className="flex justify-between border-t border-b border-rule py-3">
                 <span className="spec text-muted">LOCATION</span>
                 <span className="text-[14px]">Perth, Western Australia</span>
               </div>
@@ -118,6 +133,9 @@ export default function ContactPage() {
                   <Eyebrow>ENQUIRY</Eyebrow>
                   <span className="spec text-muted">TFL · FORM · 01</span>
                 </div>
+
+                {/* Hidden product context — shipped in POST body */}
+                <input type="hidden" name="product" value={productSlug} readOnly />
 
                 <Field label="01 · What are you trying to measure or improve?" className="mb-8">
                   <textarea

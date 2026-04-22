@@ -47,6 +47,9 @@ export default async function handler(req, res) {
   const problem = sanitise(body.problem);
   const data = sanitise(body.data);
   const email = sanitise(body.email, 200);
+  const product = sanitise(body.product, 64);
+  const ALLOWED_PRODUCTS = ['schaaq', 'lnyrd', 'warranty-triage'];
+  const productSlug = ALLOWED_PRODUCTS.includes(product) ? product : '';
 
   if (!problem) return json(res, 400, { error: 'Field 01 is required' });
   if (!data) return json(res, 400, { error: 'Field 02 is required' });
@@ -60,13 +63,21 @@ export default async function handler(req, res) {
     });
   }
 
-  const subject = 'Ten Fish Labs — new enquiry';
+  const subject = productSlug
+    ? `Ten Fish Labs — new enquiry (${productSlug})`
+    : 'Ten Fish Labs — new enquiry';
+  const productLine = productSlug ? `Product context: ${productSlug}\n\n` : '';
   const textBody =
+    `${productLine}` +
     `What are you trying to measure or improve?\n${problem}\n\n` +
     `What data are you working with?\n${data}\n\n` +
     `From: ${email}`;
 
+  const productHtml = productSlug
+    ? `<p><strong>Product context:</strong> ${escapeHtml(productSlug)}</p>`
+    : '';
   const htmlBody = `
+    ${productHtml}
     <p><strong>What are you trying to measure or improve?</strong></p>
     <p>${escapeHtml(problem).replace(/\n/g, '<br/>')}</p>
     <p><strong>What data are you working with?</strong></p>
