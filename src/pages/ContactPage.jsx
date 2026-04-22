@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Container, Eyebrow } from '../components/primitives.jsx';
+import TurnstileWidget from '../components/TurnstileWidget.jsx';
 import { getProduct } from '../data/products.js';
 import { trackEvent, EVENTS } from '../lib/events.js';
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
 
 const HONEYPOT_STYLE = {
   position: 'absolute',
@@ -36,8 +39,13 @@ export default function ContactPage({ query }) {
 
   const [form, setForm] = useState({ problem: '', data: '', email: '' });
   const [companyWebsite, setCompanyWebsite] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [state, setState] = useState({ sending: false, ok: null, error: '' });
   const [clientErr, setClientErr] = useState({});
+
+  const handleTurnstile = useCallback((token) => {
+    setTurnstileToken(token || '');
+  }, []);
 
   useEffect(() => {
     if (product) {
@@ -90,6 +98,15 @@ export default function ContactPage({ query }) {
       return;
     }
 
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      setState({
+        sending: false,
+        ok: false,
+        error: 'Please complete the verification before sending.',
+      });
+      return;
+    }
+
     setState({ sending: true, ok: null, error: '' });
     try {
       const res = await fetch('/api/contact', {
@@ -99,6 +116,7 @@ export default function ContactPage({ query }) {
           ...form,
           product: productSlug || undefined,
           company_website: companyWebsite || undefined,
+          turnstileToken: turnstileToken || undefined,
         }),
       });
       if (res.ok) {
@@ -281,12 +299,17 @@ export default function ContactPage({ query }) {
                 )}
               </div>
 
-              <div className="text-[13px] body-muted mb-8 max-w-2xl">
+              <div className="text-[13px] body-muted mb-4 max-w-2xl">
                 We use this information only to assess whether the problem is a fit
                 for Ten Fish Labs.
               </div>
 
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-ruleStrong pt-6">
+              <TurnstileWidget
+                siteKey={TURNSTILE_SITE_KEY}
+                onToken={handleTurnstile}
+              />
+
+              <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-t border-ruleStrong pt-6">
                 <div className="spec text-muted">
                   {state.sending && 'Sending…'}
                   {state.ok === true && 'Received. We will be in touch.'}

@@ -66,7 +66,29 @@ vercel --prod
 
 ### Local development
 
-Put the same three vars in `.env.local` (already gitignored) and run `vercel dev` to exercise the serverless function against Resend from localhost.
+Copy `.env.example` → `.env.local` (already gitignored), fill in values, and run `vercel dev` to exercise the serverless function against Resend from localhost.
+
+## Bot protection — Cloudflare Turnstile
+
+The contact form already has a hidden honeypot (`company_website`). Turnstile adds a second layer: a privacy-first CAPTCHA that is invisible for most legitimate users.
+
+### Setup
+
+1. Go to [Cloudflare Dashboard → Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile) and add a site for `tenfishlabs.com` (Widget mode: *Managed*).
+2. Copy the **Site key** and **Secret key**.
+3. Set env vars on the Vercel project:
+   - `VITE_TURNSTILE_SITE_KEY` — public site key (must be set for the build scope; `VITE_` prefix exposes it to the client bundle)
+   - `TURNSTILE_SECRET_KEY` — server secret (Production scope)
+4. Redeploy.
+
+When `VITE_TURNSTILE_SITE_KEY` is not set, the widget is not rendered and the server skips verification — form still works. When both keys are set, `/api/contact` rejects any submission without a valid Turnstile token.
+
+For **local development**, Cloudflare publishes always-pass test keys:
+
+- Site key: `1x00000000000000000000AA`
+- Secret key: `1x0000000000000000000000000000000AA`
+
+Put these in `.env.local` to see the widget locally without needing a real site.
 
 ## Image & media hygiene
 

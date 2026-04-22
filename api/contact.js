@@ -1,8 +1,12 @@
 // Vercel serverless function — /api/contact
 // Requires env vars:
 //   CONTACT_TO_EMAIL        destination inbox (e.g. hello@tenfishlabs.com)
-//   CONTACT_FROM_EMAIL      verified sender (e.g. noreply@tenfishlabs.com)
+//   CONTACT_FROM_EMAIL      verified sender (e.g. hello@tenfishlabs.com)
 //   RESEND_API_KEY          Resend API key (https://resend.com/)
+// Optional env vars:
+//   TURNSTILE_SECRET_KEY    Cloudflare Turnstile secret. When set, the
+//                           endpoint verifies the client token before
+//                           sending. Without it, Turnstile is skipped.
 //
 // Does not log submission content in production.
 
@@ -60,6 +64,38 @@ export default async function handler(req, res) {
   if (!problem) return json(res, 400, { error: 'Field 01 is required' });
   if (!data) return json(res, 400, { error: 'Field 02 is required' });
   if (!EMAIL_RE.test(email)) return json(res, 400, { error: 'Valid email required' });
+
+  // Cloudflare Turnstile — only enforced if the secret is configured.
+  const { TURNSTILE_SECRET_KEY } = process.env;
+  if (TURNSTILE_SECRET_KEY) {
+    const token = sanitise(body.turnstileToken, 4096);
+    if (!token) {
+      return json(res, 400, { error: 'Verification required' });
+    }
+    const params = new URLSearchParams();
+    params.set('secret', TURNSTILE_SECRET_KEY);
+    params.set('response', token);
+    const fwd = req.headers['x-forwarded-for'];
+    if (typeof fwd === 'string' && fwd) {
+      params.set('remoteip', fwd.split(',')[0].trim());
+    }
+    try {
+      const vr = await fetch(
+        'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        {
+          method: 'POST',
+          headers: { 'content-type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
+        }
+      );
+      const verdict = await vr.json().catch(() => ({ success: false }));
+      if (!verdict || !verdict.success) {
+        return json(res, 400, { error: 'Verification failed. Please retry.' });
+      }
+    } catch {
+      return json(res, 502, { error: 'Verification service unreachable' });
+    }
+  }
 
   const { CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, RESEND_API_KEY } = process.env;
   if (!CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL || !RESEND_API_KEY) {
