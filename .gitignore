@@ -16,3 +16,10 @@ Ten Fish Lab.zip
 
 # stray local docs
 *.docx
+
+# media dropped at repo root — real assets live in public/
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.mp4
