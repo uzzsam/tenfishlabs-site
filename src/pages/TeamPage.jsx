@@ -59,21 +59,38 @@ const HideOnError = ({ src, alt, className, style }) => (
 export default function TeamPage({ navigate }) {
   return (
     <main className="page-in">
-      {/* 1. Group hero — full-bleed documentary image */}
+      {/* 1. Group hero — full-bleed documentary image with title overlay */}
       <section className="relative bg-panel">
-        <div className="aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-night">
+        <div className="relative aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-night">
           <HideOnError
             src={TEAM_HERO}
             alt="Fusion reactor interior — complex systems, precisely controlled"
-            className="w-full h-full"
+            className="absolute inset-0 w-full h-full"
           />
+          {/* Subtle gradient to hold the title against varying highlights */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(0,0,0,0.0) 45%, rgba(0,0,0,0.55) 100%)',
+            }}
+          />
+          <div className="absolute inset-0 flex items-end">
+            <Container className="pb-8 md:pb-14 lg:pb-16">
+              <h1
+                className="display text-white text-[44px] md:text-[80px] lg:text-[104px] leading-[0.95] tracking-[-0.03em]"
+              >
+                Team Fusion
+              </h1>
+            </Container>
+          </div>
         </div>
         <Container className="py-12 md:py-16">
           <Eyebrow className="mb-6">TEAM</Eyebrow>
-          <h1 className="display text-[32px] md:text-[52px] lg:text-[64px] leading-[1.02] max-w-4xl">
+          <h2 className="display text-[32px] md:text-[52px] lg:text-[64px] leading-[1.02] max-w-4xl">
             A small senior team building commercial systems from product, data,
             design, governance, and domain expertise.
-          </h1>
+          </h2>
         </Container>
       </section>
 
