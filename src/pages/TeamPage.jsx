@@ -49,7 +49,7 @@ const HideOnError = ({ src, alt, className, style }) => (
     src={src}
     alt={alt}
     className={className}
-    style={{ objectFit: 'cover', objectPosition: 'center', ...style }}
+    style={{ objectFit: 'cover', objectPosition: 'top', ...style }}
     onError={(e) => {
       e.currentTarget.style.display = 'none';
     }}
@@ -161,13 +161,12 @@ export default function TeamPage({ navigate }) {
                   ['Legal entity', 'Ten Fish Pty Ltd'],
                   ['Brand', 'Ten Fish Labs'],
                   ['Location', 'Perth, Western Australia'],
-                  ['Contact', 'hello@tenfishlabs.com'],
-                ].map(([k, v], i) => (
+                ].map(([k, v], i, arr) => (
                   <div
                     key={k}
                     className={`grid grid-cols-12 py-4 ${
                       i === 0 ? 'border-t border-ruleStrong' : 'border-t border-rule'
-                    } ${i === 3 ? 'border-b border-ruleStrong' : ''}`}
+                    } ${i === arr.length - 1 ? 'border-b border-ruleStrong' : ''}`}
                   >
                     <dt className="col-span-4 md:col-span-3 spec text-muted">{k}</dt>
                     <dd className="col-span-8 md:col-span-9 text-[17px]">{v}</dd>

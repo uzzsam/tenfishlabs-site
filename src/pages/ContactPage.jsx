@@ -6,6 +6,14 @@ import { trackEvent, EVENTS } from '../lib/events.js';
 
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
 
+// Destination address is kept out of static HTML / JSX so simple scrapers
+// can't harvest it. Decoded only inside click handlers on the client.
+const CONTACT_ADDR_B64 = 'aGVsbG9AdGVuZmlzaGxhYnMuY29t';
+const decodeContactAddress = () => {
+  if (typeof atob === 'function') return atob(CONTACT_ADDR_B64);
+  return Buffer.from(CONTACT_ADDR_B64, 'base64').toString('utf-8');
+};
+
 const HONEYPOT_STYLE = {
   position: 'absolute',
   left: '-9999px',
@@ -74,7 +82,8 @@ export default function ContactPage({ query }) {
       `What are you trying to measure or improve?\n${form.problem}\n\n` +
       `What data are you working with?\n${form.data}\n\n` +
       `From: ${form.email}`;
-    window.location.href = `mailto:hello@tenfishlabs.com?subject=${encodeURIComponent(
+    const to = decodeContactAddress();
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   };
@@ -179,16 +188,13 @@ export default function ContactPage({ query }) {
       <section className="pb-24 md:pb-32">
         <Container>
           <div className="bg-panel border border-ruleStrong">
-            {/* Top strip: direct contact */}
+            {/* Top strip: direct contact (email removed for bot hygiene) */}
             <div className="grid grid-cols-1 md:grid-cols-3 border-b border-ruleStrong">
               <div className="px-6 md:px-8 py-5 border-b md:border-b-0 md:border-r border-ruleStrong">
-                <div className="spec text-muted mb-1">EMAIL</div>
-                <a
-                  className="text-[15px] md:text-[16px] break-all hover:text-muted"
-                  href="mailto:hello@tenfishlabs.com"
-                >
-                  hello@tenfishlabs.com
-                </a>
+                <div className="spec text-muted mb-1">CHANNEL</div>
+                <div className="text-[15px] md:text-[16px]">
+                  Form below
+                </div>
               </div>
               <div className="px-6 md:px-8 py-5 border-b md:border-b-0 md:border-r border-ruleStrong">
                 <div className="spec text-muted mb-1">RESPONSE</div>
@@ -314,7 +320,7 @@ export default function ContactPage({ query }) {
                   {state.sending && 'Sending…'}
                   {state.ok === true && 'Received. We will be in touch.'}
                   {state.ok === false && (state.error || 'Send failed.')}
-                  {state.ok === null && !state.sending && 'Sends to hello@tenfishlabs.com'}
+                  {state.ok === null && !state.sending && 'Reply within 2 business days'}
                 </div>
                 <button
                   type="submit"

@@ -14,7 +14,7 @@ export default function HeroMedia({
       style={{ minHeight: 420 }}
     >
       <video
-        className="w-full h-full object-cover opacity-85"
+        className="w-full h-full object-cover object-top opacity-85"
         autoPlay
         muted
         loop
@@ -33,7 +33,7 @@ export default function HeroMedia({
         data-hero-fallback
         src={fallbackImg}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover opacity-55"
+        className="absolute inset-0 w-full h-full object-cover object-top opacity-55"
         hidden
       />
       <div
