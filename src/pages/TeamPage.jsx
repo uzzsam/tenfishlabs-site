@@ -4,10 +4,10 @@ import {
   PrimaryCTA,
 } from '../components/primitives.jsx';
 
-// TODO-media: /images/team/tenfish-team-working.jpg
+// Hero — live image, no colour filter so the warm-to-cold contrast reads.
+const TEAM_HERO = '/images/team/team-hero.jpg';
 // TODO-media: /images/team/tenfish-whiteboard.jpg
 // TODO-media: /images/team/tenfish-session-detail.jpg
-const TEAM_WORKING = '/images/team/tenfish-team-working.jpg';
 const TEAM_WHITEBOARD = '/images/team/tenfish-whiteboard.jpg';
 const TEAM_SESSION = '/images/team/tenfish-session-detail.jpg';
 
@@ -63,10 +63,9 @@ export default function TeamPage({ navigate }) {
       <section className="relative bg-panel">
         <div className="aspect-[16/9] md:aspect-[16/8] overflow-hidden bg-night">
           <HideOnError
-            src={TEAM_WORKING}
-            alt="Ten Fish Labs team working"
+            src={TEAM_HERO}
+            alt="Fusion reactor interior — complex systems, precisely controlled"
             className="w-full h-full"
-            style={{ filter: 'grayscale(1) contrast(1.02)' }}
           />
         </div>
         <Container className="py-12 md:py-16">

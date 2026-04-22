@@ -58,11 +58,11 @@ Fallback while missing: each product's existing primary screenshot (via `HeroMed
 
 ### Team imagery — group/documentary, not portraits
 
-| File                                              | Status     | Used in                                  | TODO brief                                                                                 |
+| File                                              | Status     | Used in                                  | Notes                                                                                      |
 | ------------------------------------------------- | ---------- | ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `/images/team/tenfish-team-working.jpg`           | todo-media | `/team` hero · (HomePage: no image used) | Wide documentary frame of the team working together. Natural light. No corporate posing.   |
-| `/images/team/tenfish-whiteboard.jpg`             | todo-media | `/team` documentary strip (left)         | Whiteboard session — hands and board, not centred faces. Same visual language.             |
-| `/images/team/tenfish-session-detail.jpg`         | todo-media | `/team` documentary strip (right)        | Close detail — a notebook, a screen, a model on a laptop. Reinforces "we build, in situ".  |
+| `/images/team/team-hero.jpg`                      | in-use     | `/team` top-strip hero                   | Fusion-reactor interior. 2400px wide, ~610 KB JPG (compressed from 6.6 MB source). No grayscale filter so the warm/cool contrast reads. |
+| `/images/team/tenfish-whiteboard.jpg`             | todo-media | `/team` documentary strip (left)         | Whiteboard session — hands and board, not centred faces. Grayscale filter applied.         |
+| `/images/team/tenfish-session-detail.jpg`         | todo-media | `/team` documentary strip (right)        | Close detail — a notebook, a screen, a model on a laptop. Grayscale filter applied.        |
 
 ### Removed / no longer referenced
 
