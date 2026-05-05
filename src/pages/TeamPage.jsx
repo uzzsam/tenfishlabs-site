@@ -49,7 +49,7 @@ const HideOnError = ({ src, alt, className, style }) => (
     src={src}
     alt={alt}
     className={className}
-    style={{ objectFit: 'cover', objectPosition: 'top', ...style }}
+    style={{ objectFit: 'cover', objectPosition: 'left top', ...style }}
     onError={(e) => {
       e.currentTarget.style.display = 'none';
     }}
@@ -72,7 +72,7 @@ export default function TeamPage({ navigate }) {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'linear-gradient(180deg, rgba(0,0,0,0.0) 45%, rgba(0,0,0,0.55) 100%)',
+                'linear-gradient(180deg, rgba(0,0,0,0.0) 45%, rgba(0,0,0,0.385) 100%)',
             }}
           />
           <div className="absolute inset-0 flex items-end">

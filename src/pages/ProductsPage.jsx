@@ -37,7 +37,7 @@ export default function ProductsPage({ navigate }) {
                     src={p.fallbackImg}
                     alt={p.title}
                     className="w-full h-full"
-                    style={{ objectFit: 'cover', objectPosition: 'top' }}
+                    style={{ objectFit: 'cover', objectPosition: 'left top' }}
                   />
                 </div>
                 <div className="p-6">
