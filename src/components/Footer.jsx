@@ -1,4 +1,5 @@
-import { Container, PrimaryCTAGhost, TFLMark } from './primitives.jsx';
+import { Container, PrimaryCTAGhost } from './primitives.jsx';
+import tenFishLogo from '../../tenfishlabs_logo.png';
 
 export default function Footer({ navigate }) {
   return (
@@ -7,10 +8,7 @@ export default function Footer({ navigate }) {
         <div className="grid grid-cols-12 gap-8 md:gap-10 items-start">
           <div className="col-span-12 md:col-span-6">
             <div className="flex items-center gap-3 mb-6">
-              <TFLMark />
-              <span className="text-[15px] tracking-[-0.01em] font-medium">
-                TEN FISH LABS
-              </span>
+              <img src={tenFishLogo} alt="Ten Fish Labs" width="188" height="20" />
             </div>
             <p className="body-lead max-w-md">
               Perth, Western Australia
