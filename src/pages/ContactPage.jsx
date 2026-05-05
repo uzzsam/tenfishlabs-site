@@ -79,8 +79,8 @@ export default function ContactPage({ query }) {
     const subject = `Ten Fish Labs — new enquiry${subjectProduct}`;
     const body =
       (product ? `Product context: ${product.title} (${product.slug})\n\n` : '') +
-      `What are you trying to measure or improve?\n${form.problem}\n\n` +
-      `What data are you working with?\n${form.data}\n\n` +
+      `What decision or review process needs improving?\n${form.problem}\n\n` +
+      `What data does the team review?\n${form.data}\n\n` +
       `From: ${form.email}`;
     const to = decodeContactAddress();
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(
@@ -164,16 +164,17 @@ export default function ContactPage({ query }) {
 
   return (
     <main className="page-in">
-      {/* Short hero — form sits immediately below */}
+      {/* Short hero - form sits immediately below */}
       <section className="pt-16 pb-10 md:pt-24 md:pb-14">
         <Container>
           <Eyebrow className="mb-6">CONTACT</Eyebrow>
           <h1 className="display text-[36px] md:text-[56px] lg:text-[64px] leading-[1.02] tracking-[-0.03em] max-w-4xl">
-            Start a conversation.
+            Bring us the review work your current tools cannot handle.
           </h1>
           <p className="mt-6 body-lead max-w-2xl text-[16px] md:text-[17px]">
-            Tell us what you are trying to measure or improve, and the shape of the
-            data you are working with. We reply within two business days.
+            Tell us what is being reviewed, what data is involved, and what decision
+            needs a clearer evidence record. Do not paste confidential data into this
+            form.
           </p>
           {product && (
             <div className="mt-7 inline-flex items-center gap-3 border border-ink px-4 py-2">
@@ -184,7 +185,7 @@ export default function ContactPage({ query }) {
         </Container>
       </section>
 
-      {/* Form panel — obvious, bordered, on the page background */}
+      {/* Form panel - obvious, bordered, on the page background */}
       <section className="pb-24 md:pb-32">
         <Container>
           <div className="bg-panel border border-ruleStrong">
@@ -216,7 +217,7 @@ export default function ContactPage({ query }) {
                 <div>
                   <Eyebrow className="mb-3">ENQUIRY FORM</Eyebrow>
                   <h2 className="display text-[24px] md:text-[32px] leading-[1.1]">
-                    Three questions. One reply.
+                    Three questions. Enough to know whether there is a fit.
                   </h2>
                 </div>
                 <span className="spec text-muted hidden md:block">TFL · FORM · 01</span>
@@ -248,14 +249,14 @@ export default function ContactPage({ query }) {
               {/* 01 */}
               <div className="mb-10">
                 <FieldLabel number="01">
-                  What are you trying to measure or improve?
+                  What decision or review process needs improving?
                 </FieldLabel>
                 <textarea
                   rows={5}
                   value={form.problem}
                   onChange={update('problem')}
                   className={textareaCls}
-                  placeholder="e.g. cut candidate screening time without losing audit trail"
+                  placeholder="e.g. warranty claims need consistent evidence checks before routing, or candidate reviews need a defensible shortlist record"
                 />
                 {clientErr.problem && (
                   <div className="spec text-[11px] mt-2 text-ink">
@@ -266,18 +267,18 @@ export default function ContactPage({ query }) {
 
               {/* 02 */}
               <div className="mb-10">
-                <FieldLabel number="02">What data are you working with?</FieldLabel>
+                <FieldLabel number="02">What data does the team review?</FieldLabel>
                 <textarea
                   rows={5}
                   value={form.data}
                   onChange={update('data')}
                   className={textareaCls}
-                  placeholder="e.g. ATS exports, resumes, role scorecards — structured + unstructured"
+                  placeholder="e.g. ERP exports, claims forms, service notes, resumes, scorecards, policies, product records, emails, attachments"
                 />
                 <div className="text-[13px] body-muted mt-3 max-w-2xl">
-                  Describe data types only. Do not paste confidential records,
-                  customer data, passwords, commercial secrets, or live operational
-                  data into this form.
+                  Describe data types only. Do not paste confidential records, customer
+                  data, candidate data, claim files, passwords, commercial secrets, or
+                  live operational data into this form.
                 </div>
                 {clientErr.data && (
                   <div className="spec text-[11px] mt-2 text-ink">
@@ -288,7 +289,7 @@ export default function ContactPage({ query }) {
 
               {/* 03 */}
               <div className="mb-10">
-                <FieldLabel number="03">Email</FieldLabel>
+                <FieldLabel number="03">Work email</FieldLabel>
                 <input
                   type="email"
                   inputMode="email"
@@ -306,7 +307,7 @@ export default function ContactPage({ query }) {
               </div>
 
               <div className="text-[13px] body-muted mb-4 max-w-2xl">
-                We use this information only to assess whether the problem is a fit
+                We use this information only to assess whether the review problem is a fit
                 for Ten Fish Labs.
               </div>
 

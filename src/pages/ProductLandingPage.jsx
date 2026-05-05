@@ -16,6 +16,7 @@ const ROMAN = { schaaq: 'I', lnyrd: 'II', 'warranty-triage': 'III' };
 const CommercialSummary = ({ summary }) => {
   if (!summary) return null;
   const items = [
+    ['Category', summary.category],
     ['Built for', summary.builtFor],
     ['Works with', summary.worksWith],
     ['Improves', summary.improves],
@@ -34,6 +35,39 @@ const CommercialSummary = ({ summary }) => {
               <p className="text-[14px] md:text-[15px] leading-[1.55]">{value}</p>
             </div>
           ))}
+        </div>
+      </Container>
+    </section>
+  );
+};
+
+const ReviewLoop = ({ product }) => {
+  if (!product.reviewLoop) return null;
+  return (
+    <section className="py-20 md:py-28 border-b border-rule">
+      <Container>
+        <div className="grid grid-cols-12 gap-10 items-start">
+          <div className="col-span-12 md:col-span-4">
+            <Eyebrow className="mb-5">THE REVIEW LOOP</Eyebrow>
+            <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
+              Four moves from intake to record.
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-8">
+            <div className="grid grid-cols-12 gap-6">
+              {product.reviewLoop.map((step, i) => (
+                <div
+                  key={step}
+                  className="col-span-12 md:col-span-6 border-t border-ink pt-5"
+                >
+                  <div className="eyebrow mb-3">
+                    LOOP · {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <div className="display text-[20px] md:text-[22px]">{step}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Container>
     </section>
@@ -78,6 +112,40 @@ const List = ({ items }) => (
   </ul>
 );
 
+const FitBlock = ({ fit }) => {
+  if (!fit) return null;
+  const columns = [
+    ['Best fit', fit.bestFit],
+    ['Poor fit', fit.poorFit],
+  ];
+  return (
+    <section className="py-20 md:py-28 border-b border-rule bg-panel">
+      <Container>
+        <div className="grid grid-cols-12 gap-10 items-start">
+          <div className="col-span-12 md:col-span-4">
+            <Eyebrow className="mb-5">FIT</Eyebrow>
+            <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
+              Where this kind of engine belongs.
+            </h2>
+          </div>
+          <div className="col-span-12 md:col-span-8">
+            <div className="grid grid-cols-12 gap-8">
+              {columns.map(([label, items]) => (
+                <div key={label} className="col-span-12 md:col-span-6">
+                  <div className="border-t border-ink pt-5">
+                    <div className="eyebrow mb-4">{label.toUpperCase()}</div>
+                    <List items={items} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
 export default function ProductLandingPage({ product, navigate }) {
   const numeral = ROMAN[product.slug] || '';
 
@@ -119,8 +187,11 @@ export default function ProductLandingPage({ product, navigate }) {
         </div>
       </section>
 
-      {/* 1b. Commercial summary — compact */}
+      {/* 1b. Commercial summary - compact */}
       <CommercialSummary summary={product.commercialSummary} />
+
+      {/* 1c. The review loop */}
+      <ReviewLoop product={product} />
 
       {/* 2. What it does */}
       <section className="py-20 md:py-28 border-b border-rule">
@@ -270,13 +341,16 @@ export default function ProductLandingPage({ product, navigate }) {
         </Container>
       </section>
 
-      {/* 8. CTA */}
+      {/* 8. Best fit / poor fit */}
+      <FitBlock fit={product.fit} />
+
+      {/* 9. CTA */}
       <section className="py-24 md:py-32 bg-night text-white">
         <Container>
           <div className="max-w-3xl">
             <Eyebrow className="mb-8 text-white">NEXT</Eyebrow>
             <h2 className="display text-[32px] md:text-[52px] leading-[1.02]">
-              Bring a specific {product.title} use-case and we’ll map it with you.
+              {product.ctaHeadline}
             </h2>
             <div className="mt-10">
               <PrimaryCTAGhost

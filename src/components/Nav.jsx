@@ -2,10 +2,10 @@ import { useState } from 'react';
 import {
   Container,
   NavLink,
-  TFLMark,
   PrimaryCTA,
   RouterLink,
 } from './primitives.jsx';
+import tenFishLogo from '../../tenfishlabs_logo.png';
 
 const NAV_ITEMS = [
   { to: '/products', label: 'Products' },
@@ -24,8 +24,7 @@ export default function Nav({ path, navigate }) {
           navigate={navigate}
           className="flex items-center gap-3 justify-self-start"
         >
-          <TFLMark />
-          <span className="text-[15px] tracking-[-0.01em] font-medium">TEN FISH LABS</span>
+          <img src={tenFishLogo} alt="Ten Fish Labs" width="188" height="20" />
         </RouterLink>
 
         <nav className="hidden md:flex items-center justify-center gap-10">

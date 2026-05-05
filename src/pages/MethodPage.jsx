@@ -6,52 +6,135 @@ import {
 } from '../components/primitives.jsx';
 import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
 
-const STEPS = [
+const OPERATING_PATTERN = [
   [
-    '01',
-    'Start with the commercial question',
-    'We map the actual decision a team has to make — who makes it, on what evidence, and what goes wrong today. Software comes after.',
+    'Inputs',
+    'Operational records, documents, claims, candidates, submissions, ERP exports, service notes, or other client-held data.',
   ],
   [
-    '02',
-    'Stay inside the boundary',
-    'Data stays under the client’s control. No prompt context leaves for a third-party model. Proprietary engines do the work in-place.',
+    'Rules',
+    'Thresholds, criteria, policy terms, defect definitions, scoring models, escalation paths, and exceptions.',
   ],
   [
-    '03',
-    'Use AI deliberately',
-    'Extraction, classification, scoring, routing — where AI removes tedious review work. Not a chat interface bolted onto a workflow.',
+    'Engine',
+    'Extraction, classification, scoring, routing, completeness checks, commercial-impact ranking, and reporting.',
   ],
   [
-    '04',
-    'Encode the rules',
-    'Thresholds, categories, escalation paths, and exceptions sit as visible, editable rules inside the system — not inside a prompt.',
+    'Review surface',
+    'A controlled interface where the team sees evidence, exceptions, reasoning, and the next action.',
   ],
   [
-    '05',
-    'Leave a record',
-    'Every decision keeps a record of what was reviewed, which rule was applied, what changed, and who made the final call.',
+    'Record',
+    'A durable trail of what was reviewed, which rule applied, what changed, and who made the final decision.',
   ],
 ];
 
-const PRINCIPLES = [
+const BOUNDARY = [
   [
-    'No third-party LLM exposure',
-    'Sensitive operational data should not become prompt context for somebody else’s model.',
+    'Inside the boundary',
+    [
+      'Operational data',
+      'Rules',
+      'Evidence',
+      'Outputs',
+      'Review history',
+      'Permissions',
+      'Audit trail',
+    ],
   ],
   [
-    'No black boxes',
-    'Every output is tied to the evidence and rules that produced it.',
-  ],
-  [
-    'No one-shot recommenders',
-    'We build review workflows. The decision stays with the human.',
-  ],
-  [
-    'No free-text prompts',
-    'Operational review is structured work. We treat it that way.',
+    'Outside the boundary',
+    [
+      'Public AI tools',
+      'Generic model interfaces',
+      'Third-party prompt retention risk',
+      'Uncontrolled copy/paste workflows',
+    ],
   ],
 ];
+
+const WHY_NARROW = [
+  [
+    'Specific inputs',
+    'The system knows what kind of data it is reviewing and what fields matter.',
+  ],
+  [
+    'Visible rules',
+    'The logic can be inspected, tuned, versioned, and explained.',
+  ],
+  [
+    'Defensible outputs',
+    'The team gets records it can use in audit, governance, operations, or commercial review.',
+  ],
+];
+
+const STEPS = [
+  [
+    '01',
+    'Map the decision',
+    'Identify the decision, owner, data, rules, exceptions, and required record.',
+  ],
+  [
+    '02',
+    'Hold the boundary',
+    'Design the system so sensitive data stays under client control.',
+  ],
+  [
+    '03',
+    'Encode the rules',
+    'Turn criteria, policy, thresholds, and escalation paths into visible system logic.',
+  ],
+  [
+    '04',
+    'Build the review surface',
+    'Give users a structured place to review evidence, exceptions, scores, routes, and approvals.',
+  ],
+  [
+    '05',
+    'Leave the record',
+    'Capture what happened, what changed, which rule applied, and who made the call.',
+  ],
+];
+
+const FIT = [
+  [
+    'Good fit',
+    [
+      'High-volume review work',
+      'Sensitive data',
+      'Repeated decisions',
+      'Evidence requirements',
+      'Manual classification/routing/scoring',
+      'Compliance, governance, or audit pressure',
+    ],
+  ],
+  [
+    'Bad fit',
+    [
+      'Generic AI content generation',
+      'One-off scripts',
+      'Cosmetic dashboards',
+      'Workflows with no repeatable rules',
+      'Anything requiring users to paste confidential records into public AI tools',
+    ],
+  ],
+];
+
+const List = ({ items }) => (
+  <ul>
+    {items.map((item, i) => (
+      <li
+        key={item}
+        className="flex items-baseline gap-5 py-3 border-t border-rule last:border-b"
+      >
+        <span className="spec text-muted w-6 shrink-0">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <span className="text-[15px] md:text-[16px]">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 export default function MethodPage({ navigate }) {
   return (
@@ -60,14 +143,8 @@ export default function MethodPage({ navigate }) {
         <Container>
           <PageIntro
             eyebrow="METHOD"
-            title={
-              <>
-                Narrow engines.
-                <br />
-                Client-controlled boundary.
-              </>
-            }
-            intro="Sensitive operational data should not become prompt context for somebody else’s model. Ten Fish Labs builds narrow engines around the commercial question: extract, classify, score, route, and report inside a controlled data boundary."
+            title="Review engines, not chatbots."
+            intro="Operational review work is not an open-ended conversation. It is a repeated decision process: inputs, rules, exceptions, evidence, routing, approval, and record. Ten Fish Labs turns that process into a bounded commercial system inside the client’s data boundary."
           />
         </Container>
       </section>
@@ -82,8 +159,8 @@ export default function MethodPage({ navigate }) {
                 The data boundary stays with the client.
               </h2>
               <p className="body-lead mt-6 max-w-sm">
-                Inputs, the engine, and outputs all live inside a client-controlled
-                perimeter. Third-party LLM services sit outside it and stay there.
+                Inputs, rules, review surfaces, and records sit inside a
+                client-controlled perimeter. Third-party LLM services sit outside it.
               </p>
             </div>
             <div className="col-span-12 md:col-span-8">
@@ -95,74 +172,83 @@ export default function MethodPage({ navigate }) {
         </Container>
       </section>
 
-      {/* Copy block */}
+      {/* Operating pattern */}
       <section className="py-20 md:py-28 border-t border-rule">
         <Container>
-          <div className="grid grid-cols-12 gap-10">
-            <div className="col-span-12 md:col-span-5">
-              <Eyebrow className="mb-6">PRINCIPLE</Eyebrow>
-              <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
-                Remove noise. Keep judgement.
-              </h2>
-            </div>
-            <div className="col-span-12 md:col-span-7 space-y-6">
-              <p className="body-lead">
-                Where AI methodologies are useful, we use them deliberately. The goal is
-                not to add a chat interface. The goal is to remove noisy, tedious review
-                work while keeping evidence, rules, and human judgement intact.
-              </p>
-              <p className="body-lead">
-                Every system should leave a record: what was reviewed, which rule was
-                applied, what changed, and who made the final decision.
-              </p>
-            </div>
+          <Eyebrow className="mb-8">THE OPERATING PATTERN</Eyebrow>
+          <h2 className="display text-[28px] md:text-[40px] leading-[1.05] mb-12">
+            Five parts every Ten Fish Labs system has.
+          </h2>
+          <div className="grid grid-cols-12 gap-8">
+            {OPERATING_PATTERN.map(([t, d], i) => (
+              <div
+                key={t}
+                className="col-span-12 md:col-span-6 lg:col-span-4 border-t border-ink pt-6"
+              >
+                <div className="eyebrow mb-4">
+                  PART · {String(i + 1).padStart(2, '0')}
+                </div>
+                <div className="display text-[22px] md:text-[24px] mb-3">{t}</div>
+                <p className="body-muted max-w-md">{d}</p>
+              </div>
+            ))}
           </div>
         </Container>
       </section>
 
-      {/* Commercial model */}
+      {/* Client boundary */}
       <section className="py-20 md:py-28 border-t border-rule bg-panel">
         <Container>
-          <div className="grid grid-cols-12 gap-10 items-start">
+          <div className="grid grid-cols-12 gap-10">
             <div className="col-span-12 md:col-span-5">
-              <Eyebrow className="mb-6">COMMERCIAL MODEL</Eyebrow>
+              <Eyebrow className="mb-6">CLIENT BOUNDARY</Eyebrow>
               <h2 className="display text-[28px] md:text-[40px] leading-[1.05]">
-                Built for your problem. Designed to become reusable.
+                The useful work happens inside the client’s perimeter.
               </h2>
             </div>
-            <div className="col-span-12 md:col-span-7 space-y-6">
+            <div className="col-span-12 md:col-span-7 space-y-8">
               <p className="body-lead">
-                Some systems begin with a specific client problem. We configure the
-                system around the client’s workflow, data, terminology, rules, and
-                reporting needs.
+                Ten Fish Labs systems are designed so sensitive operational data remains
+                under the client’s control. The system can use AI methodologies without
+                turning confidential data into third-party prompt context.
               </p>
-              <p className="body-lead">
-                The client keeps its data, confidential workflows, and business
-                context. Ten Fish Labs retains the reusable platform, components,
-                methods, and non-client-specific product IP, so each build
-                strengthens the next one.
-              </p>
-              <div className="pt-4 grid grid-cols-2 gap-6 border-t border-ruleStrong">
-                <div className="pt-4">
-                  <div className="eyebrow-muted mb-2">CLIENT KEEPS</div>
-                  <p className="body-muted">
-                    Their data, confidential workflows, and business context.
-                  </p>
-                </div>
-                <div className="pt-4">
-                  <div className="eyebrow-muted mb-2">TEN FISH LABS KEEPS</div>
-                  <p className="body-muted">
-                    The reusable platform, components, methods, and non-client
-                    product IP.
-                  </p>
-                </div>
+              <div className="grid grid-cols-12 gap-8">
+                {BOUNDARY.map(([label, items]) => (
+                  <div key={label} className="col-span-12 md:col-span-6">
+                    <div className="border-t border-ink pt-5">
+                      <div className="eyebrow mb-4">{label.toUpperCase()}</div>
+                      <List items={items} />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Steps */}
+      {/* Why narrow beats general */}
+      <section className="py-20 md:py-28 border-t border-rule">
+        <Container>
+          <Eyebrow className="mb-8">WHY NARROW BEATS GENERAL</Eyebrow>
+          <h2 className="display text-[28px] md:text-[40px] leading-[1.05] mb-12">
+            A narrow engine is easier to trust.
+          </h2>
+          <div className="grid grid-cols-12 gap-8">
+            {WHY_NARROW.map(([t, d]) => (
+              <div
+                key={t}
+                className="col-span-12 md:col-span-4 border-t border-ink pt-6"
+              >
+                <div className="display text-[22px] md:text-[24px] mb-3">{t}</div>
+                <p className="body-muted max-w-md">{d}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Process */}
       <section className="py-20 md:py-28 border-t border-rule">
         <Container>
           <Eyebrow className="mb-8">PROCESS</Eyebrow>
@@ -181,24 +267,36 @@ export default function MethodPage({ navigate }) {
         </Container>
       </section>
 
-      {/* Principles */}
+      {/* Fit */}
+      <section className="py-20 md:py-28 border-t border-rule bg-panel">
+        <Container>
+          <div className="grid grid-cols-12 gap-10 items-start">
+            <div className="col-span-12 md:col-span-4">
+              <Eyebrow className="mb-6">FIT</Eyebrow>
+              <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
+                Good fit / Bad fit.
+              </h2>
+            </div>
+            <div className="col-span-12 md:col-span-8">
+              <div className="grid grid-cols-12 gap-8">
+                {FIT.map(([label, items]) => (
+                  <div key={label} className="col-span-12 md:col-span-6">
+                    <div className="border-t border-ink pt-5">
+                      <div className="eyebrow mb-4">{label.toUpperCase()}</div>
+                      <List items={items} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* CTA */}
       <section className="py-20 md:py-28 border-t border-rule">
         <Container>
-          <Eyebrow className="mb-8">PRINCIPLES</Eyebrow>
-          <div className="grid grid-cols-12 gap-8">
-            {PRINCIPLES.map(([t, d]) => (
-              <div
-                key={t}
-                className="col-span-12 md:col-span-6 border-t border-ink pt-6"
-              >
-                <div className="display text-[22px] md:text-[24px] mb-3">{t}</div>
-                <p className="body-muted max-w-md">{d}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-16">
-            <PrimaryCTA navigate={navigate} />
-          </div>
+          <PrimaryCTA navigate={navigate} />
         </Container>
       </section>
     </main>

@@ -7,56 +7,56 @@
 
 const DEFAULT_TITLE = 'Ten Fish Labs';
 const DEFAULT_DESCRIPTION =
-  'Ten Fish Labs builds purpose-specific commercial systems using AI methodologies and deep domain expertise, inside a client-controlled data boundary.';
+  'Ten Fish Labs builds narrow AI-assisted commercial systems for sensitive operational review work inside a client-controlled data boundary.';
 
 export const SITE_NAME = 'Ten Fish Labs';
 
 const META = {
   '/': {
-    title: 'Ten Fish Labs — Commercial systems for sensitive data',
+    title: 'Ten Fish Labs — Operational review systems for sensitive data',
     description:
-      'Purpose-specific commercial systems using AI methodologies and deep domain expertise, inside a client-controlled data boundary. Never exposes sensitive data to third-party LLMs.',
+      'Narrow AI-assisted systems for data defects, structured review workflows, and warranty claim triage — built around evidence, rules, routing, and client-controlled data.',
   },
   '/products': {
-    title: 'Products — Ten Fish Labs',
+    title: 'Products — Ten Fish Labs operational review systems',
     description:
-      'A growing portfolio of commercial systems. Schaaq for data defects, LNYRD for structured candidate review, Warranty Triage for claim routing — plus new systems in development.',
+      'Schaaq, LNYRD, and Warranty Triage turn sensitive data, repeated review work, and manual routing into evidence-backed commercial systems.',
   },
   '/method': {
-    title: 'Method — Narrow engines inside a client-controlled boundary | Ten Fish Labs',
+    title: 'Method — Review engines, not chatbots | Ten Fish Labs',
     description:
-      'How Ten Fish Labs builds commercial systems around the review work that matters — without exposing sensitive data to third-party LLMs. Evidence, rules, and a record for every decision.',
+      'How Ten Fish Labs builds narrow review engines around inputs, rules, evidence, routing, human judgement, and client-controlled data boundaries.',
   },
   '/team': {
     title: 'Team — Ten Fish Labs',
     description:
-      'A small senior team in Perth, Western Australia building commercial systems from product, data, design, governance, and domain expertise.',
+      'A small senior team in Perth building commercial systems for sensitive data, operational review, governance, and evidence-backed decision workflows.',
   },
   '/contact': {
-    title: 'Contact — Start a conversation | Ten Fish Labs',
+    title: 'Contact — Map a review workflow | Ten Fish Labs',
     description:
-      'Tell us what you are trying to measure or improve, and the shape of the data you are working with. Response within two business days.',
+      'Tell Ten Fish Labs what is being reviewed, what data is involved, and what decision needs a clearer evidence record.',
   },
 };
 
 const PRODUCT_META = {
   schaaq: {
     title:
-      'Schaaq — Find the data defects costing the business money | Ten Fish Labs',
+      'Schaaq — Data defect review engine | Ten Fish Labs',
     description:
-      'Schaaq scans operational and financial data, classifies defects, and turns data quality problems into commercial impact. Built for CFOs, CIOs, data governance, and audit teams.',
+      'Schaaq reviews operational and financial data for defects, ranks commercial impact, and produces evidence-backed remediation records.',
   },
   lnyrd: {
     title:
-      'LNYRD — Structured candidate and review workflows | Ten Fish Labs',
+      'LNYRD — Structured review and decision engine | Ten Fish Labs',
     description:
-      'LNYRD helps recruitment, HR, and assessment teams evaluate candidates and submissions against structured criteria, with an audit trail for every decision.',
+      'LNYRD turns candidate, submission, and option reviews into structured decisions with criteria, reviewer evidence, approvals, and decision records.',
   },
   'warranty-triage': {
     title:
-      'Warranty Triage — Route warranty claims faster, with clearer evidence | Ten Fish Labs',
+      'Warranty Triage — Claim triage and evidence routing | Ten Fish Labs',
     description:
-      'Warranty Triage helps manufacturers, retailers, service networks, and insurers intake, classify, route, and report warranty claims with consistent evidence and escalation control.',
+      'Warranty Triage intakes, classifies, evidence-checks, routes, and reports warranty claims while keeping sensitive claim data inside the client boundary.',
   },
 };
 
