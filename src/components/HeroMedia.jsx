@@ -14,7 +14,7 @@ export default function HeroMedia({
       style={{ minHeight: 420 }}
     >
       <video
-        className="w-full h-full object-cover object-left-top opacity-90"
+        className="w-full h-full object-cover object-left-top opacity-100"
         autoPlay
         muted
         loop
@@ -33,7 +33,7 @@ export default function HeroMedia({
         data-hero-fallback
         src={fallbackImg}
         alt=""
-        className="absolute inset-0 w-full h-full object-cover object-left-top opacity-70"
+        className="absolute inset-0 w-full h-full object-cover object-left-top opacity-90"
         hidden
       />
       <div
@@ -41,8 +41,8 @@ export default function HeroMedia({
         style={{
           background:
             tone === 'dark'
-              ? 'linear-gradient(135deg, rgba(10,10,10,0.315) 0%, rgba(10,10,10,0.105) 45%, rgba(10,10,10,0.455) 100%)'
-              : 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.105) 100%)',
+              ? 'linear-gradient(135deg, rgba(10,10,10,0.12) 0%, rgba(10,10,10,0.04) 45%, rgba(10,10,10,0.18) 100%)'
+              : 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.04) 100%)',
         }}
       />
     </div>

@@ -72,7 +72,7 @@ export default function TeamPage({ navigate }) {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'linear-gradient(180deg, rgba(0,0,0,0.0) 45%, rgba(0,0,0,0.385) 100%)',
+                'linear-gradient(180deg, rgba(0,0,0,0.0) 45%, rgba(0,0,0,0.16) 100%)',
             }}
           />
           <div className="absolute inset-0 flex items-end">
