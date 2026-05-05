@@ -20,7 +20,7 @@ const META = {
   '/products': {
     title: 'Products — Ten Fish Labs operational review systems',
     description:
-      'Schaaq, LNYRD, and Warranty Triage turn sensitive data, repeated review work, and manual routing into evidence-backed commercial systems.',
+      'Schaaq, LNYRD, Warranty Triage, Schaaq M&A, and 949 turn sensitive data, repeated review work, and manual routing into evidence-backed commercial systems.',
   },
   '/method': {
     title: 'Method — Review engines, not chatbots | Ten Fish Labs',
@@ -57,6 +57,18 @@ const PRODUCT_META = {
       'Warranty Triage — Claim triage and evidence routing | Ten Fish Labs',
     description:
       'Warranty Triage intakes, classifies, evidence-checks, routes, and reports warranty claims while keeping sensitive claim data inside the client boundary.',
+  },
+  'schaaq-ma': {
+    title:
+      'Schaaq M&A — M&A database risk diagnostic | Ten Fish Labs',
+    description:
+      'Schaaq M&A quantifies database architecture as financial risk in tech M&A using metadata-only intake, anonymisation options, confidence scoring, and VDR-ready reporting.',
+  },
+  949: {
+    title:
+      '949 — Real-estate workflow automation and compliance support | Ten Fish Labs',
+    description:
+      '949 is a controlled workflow automation platform for real-estate paperwork, admin processing, compliance flagging, and REX preparation, designed to reduce repetitive manual work while keeping sensitive decisions under human control.',
   },
 };
 

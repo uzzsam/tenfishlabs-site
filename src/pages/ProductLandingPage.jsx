@@ -11,12 +11,19 @@ import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
 import { PRODUCTS } from '../data/products.js';
 import { trackEvent, EVENTS } from '../lib/events.js';
 
-const ROMAN = { schaaq: 'I', lnyrd: 'II', 'warranty-triage': 'III' };
+const ROMAN = {
+  schaaq: 'I',
+  lnyrd: 'II',
+  'warranty-triage': 'III',
+  'schaaq-ma': 'IV',
+  949: 'V',
+};
 
 const CommercialSummary = ({ summary }) => {
   if (!summary) return null;
   const items = [
     ['Category', summary.category],
+    ['Status', summary.status],
     ['Built for', summary.builtFor],
     ['Works with', summary.worksWith],
     ['Improves', summary.improves],
@@ -169,6 +176,11 @@ export default function ProductLandingPage({ product, navigate }) {
               <p className="mt-8 body-lead max-w-xl text-[16px] md:text-[17px]">
                 {product.summary}
               </p>
+              {product.availability && (
+                <p className="mt-6 pt-5 border-t border-rule spec text-muted max-w-xl">
+                  {product.availability}
+                </p>
+              )}
               <div className="mt-10 flex items-center gap-4 flex-wrap">
                 <PrimaryCTA navigate={navigate} productSlug={product.ctaSource} />
               </div>
@@ -274,7 +286,7 @@ export default function ProductLandingPage({ product, navigate }) {
             <div className="col-span-12 md:col-span-4">
               <Eyebrow className="mb-5">HOW IT WORKS</Eyebrow>
               <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
-                Five stages, one record.
+                {product.workflow.length} stages, one record.
               </h2>
             </div>
             <div className="col-span-12 md:col-span-8">

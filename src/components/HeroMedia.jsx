@@ -8,34 +8,46 @@ export default function HeroMedia({
   className = '',
 }) {
   const bg = tone === 'dark' ? 'bg-night' : 'bg-panel';
+  const stillImg = fallbackImg || poster;
+
   return (
     <div
       className={`relative w-full h-full ${bg} overflow-hidden ${className}`}
       style={{ minHeight: 420 }}
     >
-      <video
-        className="w-full h-full object-cover object-left-top opacity-100"
-        autoPlay
-        muted
-        loop
-        playsInline
-        poster={poster}
-        onError={(e) => {
-          const el = e.currentTarget;
-          el.style.display = 'none';
-          const fb = el.parentElement?.querySelector('[data-hero-fallback]');
-          if (fb) fb.removeAttribute('hidden');
-        }}
-      >
-        <source src={video} type="video/mp4" />
-      </video>
-      <img
-        data-hero-fallback
-        src={fallbackImg}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-left-top opacity-90"
-        hidden
-      />
+      {video ? (
+        <>
+          <video
+            className="w-full h-full object-cover object-left-top opacity-100"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={poster}
+            onError={(e) => {
+              const el = e.currentTarget;
+              el.style.display = 'none';
+              const fb = el.parentElement?.querySelector('[data-hero-fallback]');
+              if (fb) fb.removeAttribute('hidden');
+            }}
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+          <img
+            data-hero-fallback
+            src={stillImg}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-left-top opacity-90"
+            hidden
+          />
+        </>
+      ) : (
+        <img
+          src={stillImg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-left-top opacity-90"
+        />
+      )}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

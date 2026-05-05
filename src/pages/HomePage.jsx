@@ -10,7 +10,7 @@ import HeroMedia from '../components/HeroMedia.jsx';
 import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
 import { PRODUCTS } from '../data/products.js';
 
-const ROMAN = ['I', 'II', 'III'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
 
 const WHERE_WE_FIT = [
   {
@@ -46,6 +46,16 @@ const PRODUCT_CARD_DETAILS = {
     ['Input', 'Claims, product data, defect codes, evidence'],
     ['Review', 'Policy, completeness, routing, escalation'],
     ['Output', 'Categorised claim queue and claim-book reporting'],
+  ],
+  'schaaq-ma': [
+    ['Input', 'Structural database metadata only'],
+    ['Review', 'Architecture risk, anonymisation, confidence scoring'],
+    ['Output', 'VDR-ready diligence reports and appendices'],
+  ],
+  949: [
+    ['Input', 'Real-estate paperwork and document packs'],
+    ['Review', 'Classification, rule checks, flags, human approval'],
+    ['Output', 'REX preparation, audit trail, dashboard visibility'],
   ],
 };
 
@@ -216,8 +226,8 @@ export default function HomePage({ navigate }) {
         <Container>
           <SectionHeader
             eyebrow="PORTFOLIO"
-            title={<>Three live systems. One operating pattern.</>}
-            intro="Each Ten Fish Labs system starts with a specific commercial review problem. The pattern is consistent: bring the data in, apply rules, surface exceptions, route the work, and leave an evidence-backed record."
+            title={<>Five product streams. One operating pattern.</>}
+            intro="Three are live. Two are in build or discovery. Each product starts with a specific commercial review or workflow problem and is built around rules, evidence, routing, and a clear decision record."
           />
 
           <div className="mt-16 grid grid-cols-12 gap-6 md:gap-8">
@@ -251,27 +261,6 @@ export default function HomePage({ navigate }) {
                 </div>
               </RouterLink>
             ))}
-            <RouterLink
-              to="/products"
-              hash="in-development"
-              navigate={navigate}
-              className="col-span-12 md:col-span-6 lg:col-span-3 group block border border-dashed border-ruleStrong hover:border-ink transition-colors"
-            >
-              <div className="aspect-[4/3] bg-page border-b border-dashed border-ruleStrong flex items-center justify-center">
-                <div className="text-center px-6">
-                  <div className="spec text-muted mb-3">IN BUILD</div>
-                  <div className="display text-[32px] text-ink">IV · · ·</div>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="eyebrow-muted mb-3">IV · IN DEVELOPMENT</div>
-                <div className="display text-[22px] mb-2">More commercial systems</div>
-                <p className="body-muted">
-                  Data quality, operational review, ESG and regulatory data, and
-                  commercial workflow automation.
-                </p>
-              </div>
-            </RouterLink>
           </div>
         </Container>
       </section>

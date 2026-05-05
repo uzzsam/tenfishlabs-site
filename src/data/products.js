@@ -15,6 +15,39 @@ const FIT_BLOCK = {
   ],
 };
 
+const SCHAAQ_MA_FIT = {
+  bestFit: [
+    'Tech M&A diligence',
+    'Metadata-only assessment',
+    'Buyers wanting risk quantified',
+    'Advisors needing VDR-ready outputs',
+    'Workflows needing confidence scoring',
+  ],
+  poorFit: [
+    'Full source-data ingestion',
+    'Generic cyber DD replacement claims',
+    'Non-structured diligence with no metadata',
+    'Use cases needing value-level data ingestion',
+  ],
+};
+
+const NINE_FOUR_NINE_FIT = {
+  bestFit: [
+    'Repeated paperwork and admin workflows',
+    'Real-estate back-office operations',
+    'Document-heavy intake and review',
+    'REX preparation and update support',
+    'Human-reviewed compliance workflows',
+  ],
+  poorFit: [
+    'Full autonomous compliance approval',
+    'Judgement-free decisioning',
+    'Workflows with no human review requirement',
+    'Marketing-site fluff',
+    'Claims that the system fully replaces expert review',
+  ],
+};
+
 export const PRODUCTS = [
   {
     slug: 'schaaq',
@@ -244,6 +277,175 @@ export const PRODUCTS = [
     fallbackImg: '/assets/triage-home.png',
     detailImg: '/assets/triage-rive.png',
     ctaSource: 'warranty-triage',
+  },
+  {
+    slug: 'schaaq-ma',
+    title: 'Schaaq M&A',
+    category: 'Pre-acquisition database risk diagnostic',
+    headline: 'Price database architecture risk before the deal closes.',
+    summary:
+      'Schaaq M&A is a pre-acquisition diagnostic that quantifies database architecture as financial risk in tech M&A using metadata-only intake, strict anonymisation options, and a proprietary economic engine.',
+    availability:
+      'In build. Defined product stream and product spec; not presented as a fully deployed live production system.',
+    whatItDoes: [
+      'Intakes structural CSV metadata only, never database values',
+      'Applies anonymisation options at full, partial, or none',
+      'Assesses database architecture as financial risk in tech M&A',
+      'Scores findings with high, medium, or low confidence levels',
+      'Produces Rapid 48hr red-flag and Deep 5-day diligence workflows',
+      'Exports VDR-ready reports, technical appendices, and confidence-scored findings',
+      'Supports advisor white-label use alongside tech DD, cyber DD, and VDR workflows',
+      'Frames outputs for Australian deal contexts including ACCC mandatory merger notification from Jan 2026, FIRB conditionality, OAIC NDB scheme, and SOCI obligations',
+    ],
+    whoItIsFor: [
+      'PE firms with in-house diligence',
+      'M&A advisory firms',
+      'Deal lawyers and corporate counsel in tech M&A',
+      'Boutique advisors in mining, energy, and ESG',
+      'Specialist deal teams',
+    ],
+    customisation: [
+      'Intake validation rules',
+      'Anonymisation settings',
+      'Confidence framework',
+      'Report templates',
+      'White-label packaging',
+      'Buyer terminology',
+      'Risk framing',
+      'VDR export packaging',
+    ],
+    workflow: [
+      ['01', 'Intake', 'Structural metadata enters the review without ingesting database values.'],
+      ['02', 'Anonymise', 'Configurable anonymisation and validation rules are applied before assessment.'],
+      ['03', 'Quantify', 'Architecture risk and confidence are scored using a four-layer quantification model.'],
+      ['04', 'Generate', 'Executive, Rapid, Deep, and technical outputs are produced for the deal team.'],
+      ['05', 'Package', 'Reports, appendices, and supporting files are prepared for VDR or advisor use.'],
+    ],
+    reviewLoop: [
+      'Structural metadata enters the intake',
+      'Anonymisation and validation are applied',
+      'Architecture risk and confidence are quantified',
+      'Executive and technical outputs are packaged',
+    ],
+    outputs: [
+      'Rapid red-flag summary',
+      'Deep assessment report',
+      'Technical appendix',
+      'VDR-ready export pack',
+      'Confidence-scored findings',
+      'Anonymisation certificate if relevant',
+    ],
+    dataBoundaryNote:
+      'Schaaq M&A processes structural metadata only. No database values are ingested. Assessment runs inside a controlled boundary with metadata-only handling and configurable anonymisation.',
+    commercialSummary: {
+      category: 'Pre-acquisition database risk diagnostic.',
+      status:
+        'In build: defined product stream and product spec, with Rapid and Deep diligence workflows being shaped for pre-release use.',
+      builtFor:
+        'PE firms, M&A advisors, counsel, boutique advisors, and specialist deal teams.',
+      worksWith:
+        'structural database metadata, schema-level signals, diligence packs, and VDR-ready reporting workflows.',
+      improves:
+        'pre-acquisition visibility, risk pricing, deal readiness, and evidence-backed technical diligence.',
+      customisable:
+        'anonymisation, reporting, confidence presentation, terminology, white-label packaging, risk framing, export packaging.',
+    },
+    fit: SCHAAQ_MA_FIT,
+    ctaHeadline:
+      "Bring us a target and we'll map the database risk review.",
+    media: null,
+    poster: '/assets/schaaq-ma.png',
+    fallbackImg: '/assets/schaaq-ma.png',
+    detailImg: '/assets/schaaq-ma.png',
+    ctaSource: 'schaaq-ma',
+  },
+  {
+    slug: '949',
+    title: '949',
+    category: 'Real-estate workflow automation',
+    headline: 'Controlled workflow automation for real-estate paperwork and compliance support.',
+    summary:
+      '949 is a controlled workflow automation platform for real-estate paperwork, admin processing, compliance flagging, and REX preparation, designed to reduce repetitive manual work while keeping compliance-sensitive decisions under human control.',
+    availability:
+      'Planning and discovery. Early product stage with an intentionally narrow MVP; not build-complete.',
+    whatItDoes: [
+      'Receives paperwork and uploads',
+      'Organises, classifies, splits, merges, renames, and preserves document packs',
+      'Extracts key operational and transaction fields',
+      'Applies checklist and rule checks',
+      'Flags missing, inconsistent, or risky items',
+      'Routes work to human review',
+      'Prepares safe REX updates for review or approved update paths',
+      'Records audit trail and workflow history',
+      'Keeps later roadmap modules separate from the narrow MVP, including title searches, ASIC checks, BYDA, Campaign Flow / CF funds requests, ConnectNow, Canva tiles, and RMA / REA review requests',
+    ],
+    whoItIsFor: [
+      'Real-estate businesses',
+      'Real-estate operations teams',
+      'Real-estate admin teams',
+      'Real-estate compliance-support teams',
+      'Back-office processing teams',
+      'Businesses using REX-based or similar paperwork workflows',
+    ],
+    customisation: [
+      'Intake paths',
+      'Document classifications',
+      'Extraction fields',
+      'Rule sets and checklists',
+      'Compliance flag logic',
+      'Human review flows',
+      'REX preparation mappings',
+      'Audit trail outputs',
+      'Dashboard views',
+    ],
+    workflow: [
+      ['01', 'Receive', 'Paperwork and uploads enter the controlled workflow queue.'],
+      ['02', 'Organise', 'Documents are classified, split, merged, renamed, and preserved as a pack.'],
+      ['03', 'Extract', 'Key operational and transaction fields are captured for review.'],
+      ['04', 'Check', 'Checklist rules and compliance-support checks surface flags and evidence.'],
+      ['05', 'Review', 'Exceptions route to authorised human reviewers before sensitive decisions are approved.'],
+      ['06', 'Prepare', 'REX preparation or approved update paths are staged safely.'],
+      ['07', 'Record', 'Audit trail, workflow history, and dashboard visibility are retained.'],
+    ],
+    reviewLoop: [
+      'Paperwork enters the workflow',
+      'Documents are organised and key data is extracted',
+      'Checklist and compliance-support rules create flags',
+      'Human reviewers approve sensitive decisions',
+    ],
+    outputs: [
+      'Organised document pack',
+      'Extracted field set',
+      'Checklist and rule results',
+      'Compliance flags',
+      'Human review queue',
+      'REX preparation output',
+      'Audit trail log',
+      'Workflow dashboard visibility',
+    ],
+    dataBoundaryNote:
+      '949 is designed as a controlled workflow layer for real-estate paperwork and operations support. It should surface issues, evidence, and exceptions while keeping final approval with authorised human reviewers, especially for power of attorney, deceased estates, company authority, trust matters, title/vendor mismatches, and other judgement-heavy scenarios.',
+    commercialSummary: {
+      category: 'Real-estate workflow automation and compliance support.',
+      status:
+        'Planning and discovery: early product stage, not build-complete, with a narrow MVP focused on intake, document handling, extraction, checks, flags, human approval, REX preparation, and audit trail.',
+      builtFor:
+        'real-estate businesses, operations teams, admin teams, compliance-support teams, and back-office processing teams.',
+      worksWith:
+        'paperwork uploads, document packs, operational fields, transaction fields, rule checks, review queues, REX preparation, and audit trails.',
+      improves:
+        'paperwork handling, admin processing, exception visibility, compliance-support routing, REX readiness, and workflow history.',
+      customisable:
+        'intake paths, document classes, extraction fields, rule sets, flag logic, review flows, REX mappings, audit outputs, dashboards.',
+    },
+    fit: NINE_FOUR_NINE_FIT,
+    ctaHeadline:
+      "Bring us a real-estate workflow and we'll map the controlled process.",
+    media: null,
+    poster: '/assets/949.png',
+    fallbackImg: '/assets/949.png',
+    detailImg: '/assets/949.png',
+    ctaSource: '949',
   },
 ];
 
