@@ -96,6 +96,11 @@ const TEAM_PREVIEW = [
     role: 'Advisory Board',
     portfolio: 'Data, ESG & Regulatory Systems',
   },
+  {
+    name: 'Hemkrit Ragoonath (Hans)',
+    role: 'Developer',
+    portfolio: 'AI, Web & Mobile Systems',
+  },
 ];
 
 export default function HomePage({ navigate }) {

@@ -43,7 +43,7 @@ const TEAM = [
     bio: 'Advises on data, ESG, and regulatory systems. Helps shape how Ten Fish Labs approaches sensitive data workflows, regulatory context, and the evidence trail each system produces.',
   },
   {
-    name: 'Hans',
+    name: 'Hemkrit Ragoonath (Hans)',
     role: 'Developer',
     portfolio: 'AI, Web & Mobile Systems',
     bio: 'Builds product features and internal tools across web, mobile, and AI workflows — from user-facing interfaces to backend integrations and automation.',
