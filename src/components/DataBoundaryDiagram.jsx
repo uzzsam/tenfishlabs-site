@@ -13,7 +13,7 @@ export default function DataBoundaryDiagram({ className = '' }) {
         <title id="dbd-title">Data boundary diagram</title>
         <desc id="dbd-desc">
           Client-controlled boundary containing internal data, a purpose-built engine, and
-          outputs — with no third-party LLM exposure.
+          outputs. Illustrative private deployment pattern; review data flows for each implementation.
         </desc>
 
         <defs>
@@ -175,7 +175,7 @@ export default function DataBoundaryDiagram({ className = '' }) {
         </text>
       </svg>
       <figcaption className="spec text-muted mt-4">
-        FIG · 01 &nbsp;·&nbsp; CLIENT-CONTROLLED BOUNDARY
+        FIG · 01 &nbsp;·&nbsp; ILLUSTRATIVE PRIVATE DEPLOYMENT
       </figcaption>
     </figure>
   );

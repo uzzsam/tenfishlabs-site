@@ -91,8 +91,8 @@ const STEPS = [
   ],
   [
     '05',
-    'Leave the record',
-    'Capture what happened, what changed, which rule applied, and who made the call.',
+    'Record and measure',
+    'Capture decisions and source evidence, then test turnaround time, review effort, operating cost and agreed outcomes in a pilot.',
   ],
 ];
 
@@ -111,7 +111,7 @@ const FIT = [
   [
     'Bad fit',
     [
-      'Generic AI content generation',
+      'Content generation without source rights or editorial review',
       'One-off scripts',
       'Cosmetic dashboards',
       'Workflows with no repeatable rules',
@@ -143,8 +143,8 @@ export default function MethodPage({ navigate }) {
         <Container>
           <PageIntro
             eyebrow="METHOD"
-            title="Review engines, not chatbots."
-            intro="Operational review work is not an open-ended conversation. It is a repeated decision process: inputs, rules, exceptions, evidence, routing, approval, and record. Ten Fish Labs turns that process into a bounded commercial system inside the client’s data boundary."
+            title="Map. Build. Review. Measure."
+            intro="We start with the workflow, the data and the commercial question. Then we define rules, review responsibilities, data handling and the measures that will show whether the system creates value."
           />
         </Container>
       </section>
@@ -159,8 +159,9 @@ export default function MethodPage({ navigate }) {
                 The data boundary stays with the client.
               </h2>
               <p className="body-lead mt-6 max-w-sm">
-                Inputs, rules, review surfaces, and records sit inside a
-                client-controlled perimeter. Third-party LLM services sit outside it.
+                For sensitive-data review systems, inputs, rules and records are designed
+                to sit inside a client-controlled perimeter. This diagram illustrates
+                that deployment pattern; data flows are assessed for each implementation.
               </p>
             </div>
             <div className="col-span-12 md:col-span-8">
@@ -177,7 +178,7 @@ export default function MethodPage({ navigate }) {
         <Container>
           <Eyebrow className="mb-8">THE OPERATING PATTERN</Eyebrow>
           <h2 className="display text-[28px] md:text-[40px] leading-[1.05] mb-12">
-            Five parts every Ten Fish Labs system has.
+            Five foundations for a controlled workflow.
           </h2>
           <div className="grid grid-cols-12 gap-8">
             {OPERATING_PATTERN.map(([t, d], i) => (
@@ -208,9 +209,10 @@ export default function MethodPage({ navigate }) {
             </div>
             <div className="col-span-12 md:col-span-7 space-y-8">
               <p className="body-lead">
-                Ten Fish Labs systems are designed so sensitive operational data remains
-                under the client’s control. The system can use AI methodologies without
-                turning confidential data into third-party prompt context.
+                Sensitive operational data is handled under an agreed architecture. External
+                services, if required for content or translation, need explicit decisions
+                about permitted data, provider terms, access, retention and review. A private
+                deployment and an approved external content pipeline have different requirements.
               </p>
               <div className="grid grid-cols-12 gap-8">
                 {BOUNDARY.map(([label, items]) => (

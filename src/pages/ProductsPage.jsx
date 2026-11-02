@@ -4,6 +4,7 @@ import {
   PageIntro,
   RouterLink,
 } from '../components/primitives.jsx';
+import Capabilities from '../components/Capabilities.jsx';
 import { PRODUCTS } from '../data/products.js';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
@@ -16,10 +17,12 @@ export default function ProductsPage({ navigate }) {
           <PageIntro
             eyebrow="PRODUCTS"
             title={<>A growing portfolio of commercial systems.</>}
-            intro="Three are live. Two are in build or discovery. Each system starts with a specific commercial problem and is built so the useful parts can be adapted for similar problems later."
+            intro="Our product streams address data diagnostics, structured review and controlled workflows. Alongside them, ProductiveQ undertakes process mapping and operational analysis, with its value measurement platform in development."
           />
         </Container>
       </section>
+
+      <Capabilities navigate={navigate} />
 
       <section className="pb-24 md:pb-32 border-t border-rule">
         <Container className="pt-16 md:pt-20">

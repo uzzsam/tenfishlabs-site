@@ -4,6 +4,8 @@ import TurnstileWidget from '../components/TurnstileWidget.jsx';
 import { getProduct } from '../data/products.js';
 import { trackEvent, EVENTS } from '../lib/events.js';
 
+const PRODUCTIVEQ_CONTEXT = { slug: 'productiveq', title: 'ProductiveQ process mapping' };
+
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
 
 // Destination address is kept out of static HTML / JSX so simple scrapers
@@ -43,7 +45,9 @@ const textareaCls = `${inputCls} resize-y min-h-[120px] md:min-h-[140px]`;
 
 export default function ContactPage({ query }) {
   const productSlug = query?.product || '';
-  const product = productSlug ? getProduct(productSlug) : null;
+  const product = productSlug === 'productiveq'
+    ? PRODUCTIVEQ_CONTEXT
+    : productSlug ? getProduct(productSlug) : null;
 
   const [form, setForm] = useState({ problem: '', data: '', email: '' });
   const [companyWebsite, setCompanyWebsite] = useState('');

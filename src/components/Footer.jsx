@@ -14,8 +14,8 @@ export default function Footer({ navigate }) {
               Perth, Western Australia
             </p>
             <p className="body-muted max-w-md mt-2">
-              Software for commercial systems, operational review, and sensitive data
-              workflows.
+              AI products, process mapping and controlled workflows,
+              built around evidence and measurable value.
             </p>
           </div>
 

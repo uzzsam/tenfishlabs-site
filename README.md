@@ -1,6 +1,6 @@
 # Ten Fish Labs
 
-Marketing site for Ten Fish Labs — purpose-specific commercial systems built with AI methodologies and deep domain expertise, for sensitive data workflows that should not be exposed to third-party LLMs.
+Marketing site for Ten Fish Labs, a Perth-based AI product studio building financial and operational systems, with ProductiveQ process mapping and value measurement. Data handling is defined for each implementation.
 
 Vite + React + Tailwind. Pathname-based routing (no hash-only state). Vercel serverless `/api/contact`.
 

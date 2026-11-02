@@ -22,6 +22,14 @@
   * {
     -webkit-tap-highlight-color: transparent;
   }
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #256c62;
+    outline-offset: 5px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
 }
 
 @layer components {
@@ -66,7 +74,21 @@
   .body-muted {
     font-size: 14px;
     line-height: 1.65;
-    color: #6b6b6b;
+    color: #5d6260;
+  }
+  .hero-surface {
+    background: #f6f7f4;
+  }
+  .hero-process {
+    border-top: 4px solid #93b9a6;
+    box-shadow: 16px 16px 0 #e3e8df;
+  }
+  .portfolio-card {
+    background: #fff;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .portfolio-card:hover {
+    box-shadow: 0 8px 24px #1111110d;
   }
   .hairline {
     height: 1px;
@@ -161,4 +183,16 @@
   .no-scrollbar {
     scrollbar-width: none;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-in { animation: none; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+
+@media (max-width: 767px) {
+  .grid-cols-12 { column-gap: 0; }
+  .grid-cols-12 > * { min-width: 0; }
+  .hero-surface .eyebrow { letter-spacing: .12em; font-size: 10px; }
+  .hero-process { box-shadow: 8px 8px 0 #e3e8df; }
 }

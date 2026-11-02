@@ -13,9 +13,9 @@ export const SITE_NAME = 'Ten Fish Labs';
 
 const META = {
   '/': {
-    title: 'Ten Fish Labs — Operational review systems for sensitive data',
+    title: 'Ten Fish Labs | AI products, process mapping and measurable value',
     description:
-      'Narrow AI-assisted systems for data defects, structured review workflows, and warranty claim triage — built around evidence, rules, routing, and client-controlled data.',
+      'Perth-based AI product studio: financial and operational systems, ProductiveQ process mapping, controlled automation and value measurement.',
   },
   '/products': {
     title: 'Products — Ten Fish Labs operational review systems',
@@ -23,7 +23,7 @@ const META = {
       'Schaaq, LNYRD, Warranty Triage, Schaaq M&A, and 949 turn sensitive data, repeated review work, and manual routing into evidence-backed commercial systems.',
   },
   '/method': {
-    title: 'Method — Review engines, not chatbots | Ten Fish Labs',
+    title: 'Method | Map, build, review and measure | Ten Fish Labs',
     description:
       'How Ten Fish Labs builds narrow review engines around inputs, rules, evidence, routing, human judgement, and client-controlled data boundaries.',
   },

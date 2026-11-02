@@ -58,7 +58,7 @@ export default async function handler(req, res) {
   const data = sanitise(body.data);
   const email = sanitise(body.email, 200);
   const product = sanitise(body.product, 64);
-  const ALLOWED_PRODUCTS = ['schaaq', 'lnyrd', 'warranty-triage'];
+  const ALLOWED_PRODUCTS = ['schaaq', 'lnyrd', 'warranty-triage', 'productiveq'];
   const productSlug = ALLOWED_PRODUCTS.includes(product) ? product : '';
 
   if (!problem) return json(res, 400, { error: 'Field 01 is required' });
