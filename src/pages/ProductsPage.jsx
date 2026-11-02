@@ -7,7 +7,7 @@ import {
 import Capabilities from '../components/Capabilities.jsx';
 import { PRODUCTS } from '../data/products.js';
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 export default function ProductsPage({ navigate }) {
   return (
@@ -22,8 +22,6 @@ export default function ProductsPage({ navigate }) {
         </Container>
       </section>
 
-      <Capabilities navigate={navigate} />
-
       <section className="pb-24 md:pb-32 border-t border-rule">
         <Container className="pt-16 md:pt-20">
           <div className="grid grid-cols-12 gap-6 md:gap-8">
@@ -37,9 +35,9 @@ export default function ProductsPage({ navigate }) {
                 <div className="aspect-[4/3] bg-panel overflow-hidden border-b border-rule">
                   <img
                     src={p.fallbackImg}
-                    alt={p.title}
+                    alt={p.screenshotAlt || p.title}
                     className="w-full h-full"
-                    style={{ objectFit: 'cover', objectPosition: 'left top' }}
+                    style={{ objectFit: p.screenshotAlt ? 'contain' : 'cover', objectPosition: 'left top' }}
                   />
                 </div>
                 <div className="p-6">
@@ -79,6 +77,7 @@ export default function ProductsPage({ navigate }) {
           </div>
         </Container>
       </section>
+      <Capabilities navigate={navigate} />
     </main>
   );
 }

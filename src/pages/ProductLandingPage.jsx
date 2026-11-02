@@ -12,11 +12,12 @@ import { PRODUCTS } from '../data/products.js';
 import { trackEvent, EVENTS } from '../lib/events.js';
 
 const ROMAN = {
-  schaaq: 'I',
-  lnyrd: 'II',
-  'warranty-triage': 'III',
-  'schaaq-ma': 'IV',
-  949: 'V',
+  productiveq: 'I',
+  schaaq: 'II',
+  lnyrd: 'III',
+  'warranty-triage': 'IV',
+  'schaaq-ma': 'V',
+  949: 'VI',
 };
 
 const CommercialSummary = ({ summary }) => {
@@ -183,6 +184,7 @@ export default function ProductLandingPage({ product, navigate }) {
               )}
               <div className="mt-10 flex items-center gap-4 flex-wrap">
                 <PrimaryCTA navigate={navigate} productSlug={product.ctaSource} />
+                {product.website && <a href={product.website} className="btn-ghost">Visit ProductiveQ <span aria-hidden="true">↗</span></a>}
               </div>
               <div className="mt-10 pt-6 border-t border-rule">
                 <SiblingNav currentSlug={product.slug} navigate={navigate} />
@@ -190,11 +192,12 @@ export default function ProductLandingPage({ product, navigate }) {
             </Container>
           </div>
           <div className="col-span-12 md:col-span-5 bg-night">
-            <HeroMedia
-              video={product.media}
-              poster={product.poster}
-              fallbackImg={product.fallbackImg}
-            />
+            {product.screenshotCaption ? (
+              <figure className="h-full bg-panel flex flex-col justify-center p-5 md:p-8">
+                <a href={product.website} aria-label="Visit the ProductiveQ website"><img src={product.fallbackImg} alt={product.screenshotAlt} className="w-full h-auto border border-rule" /></a>
+                <figcaption className="body-muted mt-4">{product.screenshotCaption}</figcaption>
+              </figure>
+            ) : <HeroMedia video={product.media} poster={product.poster} fallbackImg={product.fallbackImg} />}
           </div>
         </div>
       </section>
@@ -259,8 +262,7 @@ export default function ProductLandingPage({ product, navigate }) {
                 {product.title} is shaped to the commercial context.
               </h2>
               <p className="body-lead mt-5 max-w-md">
-                The system is deployed with the client’s rules, terminology, and
-                integrations baked in — not as a generic tool the team has to bend to.
+                {product.customisationIntro || 'The system is deployed with the client’s rules, terminology, and integrations baked in — not as a generic tool the team has to bend to.'}
               </p>
             </div>
             <div className="col-span-12 md:col-span-7">
@@ -314,7 +316,7 @@ export default function ProductLandingPage({ product, navigate }) {
             <div className="col-span-12 md:col-span-5">
               <Eyebrow className="mb-5">DATA BOUNDARY</Eyebrow>
               <h2 className="display text-[28px] md:text-[36px] leading-[1.05]">
-                Your data stays on your side of the line.
+                {product.dataBoundaryTitle || 'Your data stays on your side of the line.'}
               </h2>
               <p className="body-lead mt-5 max-w-md">{product.dataBoundaryNote}</p>
               <div className="mt-6">
@@ -329,7 +331,7 @@ export default function ProductLandingPage({ product, navigate }) {
             </div>
             <div className="col-span-12 md:col-span-7">
               <div className="bg-panel p-6 md:p-10 border border-rule">
-                <DataBoundaryDiagram />
+                {product.hideBoundaryDiagram ? <p className="body-lead">Start with sample data. Agree the information, access and responsibilities for a pilot before connecting customer systems.</p> : <DataBoundaryDiagram />}
               </div>
             </div>
           </div>

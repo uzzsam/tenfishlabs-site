@@ -20,7 +20,7 @@ const META = {
   '/products': {
     title: 'Products — Ten Fish Labs operational review systems',
     description:
-      'Schaaq, LNYRD, Warranty Triage, Schaaq M&A, and 949 turn sensitive data, repeated review work, and manual routing into evidence-backed commercial systems.',
+      'ProductiveQ process capture and management, alongside Schaaq, LNYRD, Warranty Triage, Schaaq M&A and 949: systems built around defined workflows and evidence.',
   },
   '/method': {
     title: 'Method | Map, build, review and measure | Ten Fish Labs',
@@ -40,6 +40,10 @@ const META = {
 };
 
 const PRODUCT_META = {
+  productiveq: {
+    title: 'ProductiveQ | Process capture and management | Ten Fish Labs',
+    description: 'Oil and gas process mapping, process capture and connected roles, documents and systems. Explore ProductiveQ, with automation and value measurement in development.',
+  },
   schaaq: {
     title:
       'Schaaq — Data defect review engine | Ten Fish Labs',

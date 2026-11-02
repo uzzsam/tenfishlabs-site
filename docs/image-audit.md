@@ -90,3 +90,11 @@ The `/team` page and the HomePage team preview now rely on typographic role card
 3. No product screenshot may be reused as decorative filler. One product, one context.
 4. Team imagery is group/documentary — not corporate headshot-led.
 5. Every new `/images/*` or `/video/*` path must be added to this table with a `todo-media` entry *before* it lands in `public/`.
+
+## ProductiveQ homepage capture (2 November 2026)
+
+- Intended asset: `/assets/productiveq-homepage.webp`.
+- Source: actual public homepage, https://www.productiveq.com/, captured through the supported browser screenshot API on 2 November 2026.
+- The capture shows the ProductiveQ logo, “Your business. One clear map.” hero and connected sphere. It is the marketing homepage, not the process editor.
+- Used only on its own product cards and product page, with descriptive alt text and a dated caption.
+- Status: in-use. Original capture: 1265 × 712 JPEG, 62,028 bytes; converted to WebP at quality 86 without changing the content.

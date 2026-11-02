@@ -10,7 +10,7 @@ import Capabilities from '../components/Capabilities.jsx';
 import DataBoundaryDiagram from '../components/DataBoundaryDiagram.jsx';
 import { PRODUCTS } from '../data/products.js';
 
-const ROMAN = ['I', 'II', 'III', 'IV', 'V'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI'];
 
 const WHERE_WE_FIT = [
   {
@@ -32,6 +32,11 @@ const WHERE_WE_FIT = [
 ];
 
 const PRODUCT_CARD_DETAILS = {
+  productiveq: [
+    ['Input', 'Functions, workflows, roles, documents and systems'],
+    ['Review', 'Process capture, ownership, handovers and versions'],
+    ['Output', 'Connected process maps and improvement context'],
+  ],
   schaaq: [
     ['Input', 'Operational and financial data'],
     ['Review', 'Data defects, severity, ownership, commercial impact'],
@@ -225,9 +230,9 @@ export default function HomePage({ navigate }) {
                 <div className="aspect-[4/3] bg-panel overflow-hidden border-b border-rule">
                   <img
                     src={p.fallbackImg}
-                    alt={p.title}
+                    alt={p.screenshotAlt || p.title}
                     className="w-full h-full"
-                    style={{ objectFit: 'cover', objectPosition: 'left top' }}
+                    style={{ objectFit: p.screenshotAlt ? 'contain' : 'cover', objectPosition: 'left top' }}
                   />
                 </div>
                 <div className="p-6">
